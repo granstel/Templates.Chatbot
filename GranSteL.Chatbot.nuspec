@@ -2,16 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>GranSteL.Templates.Chatbot</id>
-		<version>1.0.3</version>
+		<version>1.0.2</version>
 		<authors>GranSteL</authors>
 		<owners>GranSteL</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<licenseUrl>https://github.com/granstel/Templates.Chatbot/blob/master/LICENSE</licenseUrl>
 		<projectUrl>https://github.com/granstel/Templates.Chatbot</projectUrl>   
+		<repository url="https://github.com/granstel/Templates.Chatbot" />
 		<description>Chat bot template for messengers</description>
 		<releaseNotes>Fix repositury url</releaseNotes>
 		<tags>Chatbot</tags>
-		<repository url="https://github.com/granstel/Templates.Chatbot" />
 		<packageTypes>
 			<packageType name="Template" />
 		</packageTypes>
