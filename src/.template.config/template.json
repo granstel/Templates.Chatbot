@@ -1,0 +1,15 @@
+    
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "GranSteL",
+  "classifications": [ "Web/WebAPI" ], // Use command 'dotnet new' to see list of other classifications
+  "name": "GranSteL.Chatbot", // Name that is displayed when running 'dotnet new' command
+  "identity": "GranSteL.Chatbot", // Unique name for this template
+  "shortName": "gsl.chatbot.full", // Alternative shortname, i.e. 'dotnet new mygamestartup'
+  "tags": {
+    "language": "C#", // Specify that this template is in C#.
+    "type": "project"
+  },
+  "sourceName": "GranSteL.Chatbot", // Will replace the string 'MyStartup' with the value provided via -n.
+  "preferNameDirectory": true, // If -n is not specified, will use name of the current directory
+}

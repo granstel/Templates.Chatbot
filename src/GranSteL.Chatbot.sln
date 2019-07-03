@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Api", "GranSteL.Chatbot.Api\GranSteL.Chatbot.Api.csproj", "{57253AE6-A026-4050-A04B-4B3A5969BE01}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Models", "GranSteL.Chatbot.Models\GranSteL.Chatbot.Models.csproj", "{2A901FDB-238B-4510-BB1D-6D169361FA60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Services", "GranSteL.Chatbot.Services\GranSteL.Chatbot.Services.csproj", "{795BC172-BD86-4A15-BBDD-A9696F7DEE27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Tests", "0 - Tests", "{7550458D-AF2F-4233-BF54-49C36113F587}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Services.Tests", "GranSteL.Chatbot.Services.Tests\GranSteL.Chatbot.Services.Tests.csproj", "{0460EC82-4E93-4C91-8372-BF1CEFA51D91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Messengers.Tests", "GranSteL.Chatbot.Messengers.Tests\GranSteL.Chatbot.Messengers.Tests.csproj", "{ED5525FF-28D9-48B7-8D0C-4125F63E12BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Messengers.Chat2Desk", "GranSteL.Chatbot.Messengers.Chat2Desk\GranSteL.Chatbot.Messengers.Chat2Desk.csproj", "{68DBF992-4AF6-492A-930F-6D87E3F7E182}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Messengers", "GranSteL.Chatbot.Messengers\GranSteL.Chatbot.Messengers.csproj", "{F3415D07-3FF7-45FC-AB9E-278BC2EC6157}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Messengers.Chat2Desk.Tests", "GranSteL.Chatbot.Messengers.Chat2Desk.Tests\GranSteL.Chatbot.Messengers.Chat2Desk.Tests.csproj", "{9E07E06B-AA6D-4B3C-9CA3-F6D06224A0B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messengers", "Messengers", "{ECB31418-3F4F-411C-8AD4-65C342B46B94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Messengers.Telegram", "GranSteL.Chatbot.Messengers.Telegram\GranSteL.Chatbot.Messengers.Telegram.csproj", "{4A56956A-226F-4E72-8097-7C632D31D457}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Messengers.Telegram.Tests", "GranSteL.Chatbot.Messengers.Telegram.Tests\GranSteL.Chatbot.Messengers.Telegram.Tests.csproj", "{25EEF0F9-87A8-4CC3-A667-706984634BA4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Messengers.Yandex", "GranSteL.Chatbot.Messengers.Yandex\GranSteL.Chatbot.Messengers.Yandex.csproj", "{8E270447-BD24-48A4-88AE-D669E7432BB0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Messengers.Yandex.Tests", "GranSteL.Chatbot.Messengers.Yandex.Tests\GranSteL.Chatbot.Messengers.Yandex.Tests.csproj", "{BBF30B7F-5328-492A-8EC6-7F61F49F2AC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57253AE6-A026-4050-A04B-4B3A5969BE01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57253AE6-A026-4050-A04B-4B3A5969BE01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57253AE6-A026-4050-A04B-4B3A5969BE01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57253AE6-A026-4050-A04B-4B3A5969BE01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A901FDB-238B-4510-BB1D-6D169361FA60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A901FDB-238B-4510-BB1D-6D169361FA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A901FDB-238B-4510-BB1D-6D169361FA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A901FDB-238B-4510-BB1D-6D169361FA60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{795BC172-BD86-4A15-BBDD-A9696F7DEE27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{795BC172-BD86-4A15-BBDD-A9696F7DEE27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{795BC172-BD86-4A15-BBDD-A9696F7DEE27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{795BC172-BD86-4A15-BBDD-A9696F7DEE27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0460EC82-4E93-4C91-8372-BF1CEFA51D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0460EC82-4E93-4C91-8372-BF1CEFA51D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0460EC82-4E93-4C91-8372-BF1CEFA51D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0460EC82-4E93-4C91-8372-BF1CEFA51D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED5525FF-28D9-48B7-8D0C-4125F63E12BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED5525FF-28D9-48B7-8D0C-4125F63E12BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED5525FF-28D9-48B7-8D0C-4125F63E12BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED5525FF-28D9-48B7-8D0C-4125F63E12BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68DBF992-4AF6-492A-930F-6D87E3F7E182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68DBF992-4AF6-492A-930F-6D87E3F7E182}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68DBF992-4AF6-492A-930F-6D87E3F7E182}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68DBF992-4AF6-492A-930F-6D87E3F7E182}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3415D07-3FF7-45FC-AB9E-278BC2EC6157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3415D07-3FF7-45FC-AB9E-278BC2EC6157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3415D07-3FF7-45FC-AB9E-278BC2EC6157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3415D07-3FF7-45FC-AB9E-278BC2EC6157}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E07E06B-AA6D-4B3C-9CA3-F6D06224A0B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E07E06B-AA6D-4B3C-9CA3-F6D06224A0B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E07E06B-AA6D-4B3C-9CA3-F6D06224A0B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E07E06B-AA6D-4B3C-9CA3-F6D06224A0B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A56956A-226F-4E72-8097-7C632D31D457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A56956A-226F-4E72-8097-7C632D31D457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A56956A-226F-4E72-8097-7C632D31D457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A56956A-226F-4E72-8097-7C632D31D457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25EEF0F9-87A8-4CC3-A667-706984634BA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25EEF0F9-87A8-4CC3-A667-706984634BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25EEF0F9-87A8-4CC3-A667-706984634BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25EEF0F9-87A8-4CC3-A667-706984634BA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E270447-BD24-48A4-88AE-D669E7432BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E270447-BD24-48A4-88AE-D669E7432BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E270447-BD24-48A4-88AE-D669E7432BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E270447-BD24-48A4-88AE-D669E7432BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBF30B7F-5328-492A-8EC6-7F61F49F2AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF30B7F-5328-492A-8EC6-7F61F49F2AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF30B7F-5328-492A-8EC6-7F61F49F2AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF30B7F-5328-492A-8EC6-7F61F49F2AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0460EC82-4E93-4C91-8372-BF1CEFA51D91} = {7550458D-AF2F-4233-BF54-49C36113F587}
+		{ED5525FF-28D9-48B7-8D0C-4125F63E12BD} = {7550458D-AF2F-4233-BF54-49C36113F587}
+		{68DBF992-4AF6-492A-930F-6D87E3F7E182} = {ECB31418-3F4F-411C-8AD4-65C342B46B94}
+		{F3415D07-3FF7-45FC-AB9E-278BC2EC6157} = {ECB31418-3F4F-411C-8AD4-65C342B46B94}
+		{9E07E06B-AA6D-4B3C-9CA3-F6D06224A0B1} = {7550458D-AF2F-4233-BF54-49C36113F587}
+		{4A56956A-226F-4E72-8097-7C632D31D457} = {ECB31418-3F4F-411C-8AD4-65C342B46B94}
+		{25EEF0F9-87A8-4CC3-A667-706984634BA4} = {7550458D-AF2F-4233-BF54-49C36113F587}
+		{8E270447-BD24-48A4-88AE-D669E7432BB0} = {ECB31418-3F4F-411C-8AD4-65C342B46B94}
+		{BBF30B7F-5328-492A-8EC6-7F61F49F2AC5} = {7550458D-AF2F-4233-BF54-49C36113F587}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8B87A9C-C6A0-4ACE-A76D-013674B4D97A}
+	EndGlobalSection
+EndGlobal

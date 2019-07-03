@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Mapping\Rules\**" />
+    <EmbeddedResource Remove="Mapping\Rules\**" />
+    <None Remove="Mapping\Rules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.0" />
+    <PackageReference Include="Dialoflow.Api.V1.Standard" Version="1.3.0" />
+    <PackageReference Include="NLog" Version="4.5.3" />
+    <PackageReference Include="RabbitMQ.Client" Version="4.1.1" />
+    <PackageReference Include="RestSharp" Version="106.2.1" />
+    <PackageReference Include="StackExchange.Redis" Version="1.2.6" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GranSteL.Chatbot.Models\GranSteL.Chatbot.Models.csproj" />
+  </ItemGroup>
+
+</Project>

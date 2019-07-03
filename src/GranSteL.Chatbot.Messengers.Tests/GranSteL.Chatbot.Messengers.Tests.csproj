@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.2" />
+    <PackageReference Include="Moq" Version="4.8.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="NUnit" Version="3.10.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GranSteL.Chatbot.Messengers\GranSteL.Chatbot.Messengers.csproj" />
+    <ProjectReference Include="..\GranSteL.Chatbot.Models\GranSteL.Chatbot.Models.csproj" />
+    <ProjectReference Include="..\GranSteL.Chatbot.Services\GranSteL.Chatbot.Services.csproj" />
+  </ItemGroup>
+
+</Project>
