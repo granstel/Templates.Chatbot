@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using AutoMapper;
-using GranSteL.Chatbot.Messengers.Yandex.Models;
 using NUnit.Framework;
+using Yandex.Dialogs.Models;
 
 namespace GranSteL.Chatbot.Messengers.Yandex.Tests
 {

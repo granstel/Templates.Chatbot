@@ -1,5 +1,5 @@
-﻿using GranSteL.Chatbot.Messengers.Yandex.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Yandex.Dialogs.Models;
 
 namespace GranSteL.Chatbot.Messengers.Yandex
 {

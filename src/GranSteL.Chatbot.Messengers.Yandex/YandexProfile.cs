@@ -1,9 +1,9 @@
 using System;
 using AutoMapper;
-using GranSteL.Chatbot.Messengers.Yandex.Models;
 using GranSteL.Chatbot.Models.Internal;
+using Yandex.Dialogs.Models;
 using Internal = GranSteL.Chatbot.Models.Internal;
-using Response = GranSteL.Chatbot.Messengers.Yandex.Models.Response;
+using YandexModels = Yandex.Dialogs.Models;
 
 namespace GranSteL.Chatbot.Messengers.Yandex
 {
@@ -23,9 +23,10 @@ namespace GranSteL.Chatbot.Messengers.Yandex
             CreateMap<Internal.Response, OutputModel>()
                 .ForMember(d => d.Response, m => m.MapFrom(s => s))
                 .ForMember(d => d.Session, m => m.MapFrom(s => s))
-                .ForMember(d => d.Version, m => m.Ignore());
+                .ForMember(d => d.Version, m => m.Ignore())
+                .ForMember(d => d.StartAccountLinking, m => m.Ignore());
 
-            CreateMap<Internal.Response, Response>()
+            CreateMap<Internal.Response, YandexModels.Response>()
                 .ForMember(d => d.Text, m => m.MapFrom(s => s.ResponseText.Replace(Environment.NewLine, "\n")))
                 .ForMember(d => d.Tts, m => m.MapFrom(s => s.AlternativeText.Replace(Environment.NewLine, "\n")))
                 .ForMember(d => d.EndSession, m => m.MapFrom(s => s.Finished))
@@ -39,7 +40,8 @@ namespace GranSteL.Chatbot.Messengers.Yandex
             CreateMap<InputModel, OutputModel>()
                 .ForMember(d => d.Session, m => m.MapFrom(s => s.Session))
                 .ForMember(d => d.Version, m => m.MapFrom(s => s.Version))
-                .ForMember(d => d.Response, m => m.Ignore());
+                .ForMember(d => d.Response, m => m.Ignore())
+                .ForMember(d => d.StartAccountLinking, m => m.Ignore());
         }
     }
 }

@@ -12,12 +12,13 @@
     </Content>
   </ItemGroup>
 
+
   <ItemGroup>
-    <ProjectReference Include="..\GranSteL.Chatbot.Messengers\GranSteL.Chatbot.Messengers.csproj" />
+    <PackageReference Include="Yandex.Dialogs.Models" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\GranSteL.Chatbot.Messengers\GranSteL.Chatbot.Messengers.csproj" />
   </ItemGroup>
 
 </Project>
