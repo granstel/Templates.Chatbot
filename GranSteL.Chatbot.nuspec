@@ -2,21 +2,23 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>GranSteL.Templates.Chatbot</id>
-		<version>1.0.2</version>
+		<title>GranSteL.Templates.Chatbot</title>
+		<version>1.0.3</version>
 		<authors>GranSteL</authors>
 		<owners>GranSteL</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<licenseUrl>https://github.com/granstel/Templates.Chatbot/blob/master/LICENSE</licenseUrl>
-		<projectUrl>https://github.com/granstel/Templates.Chatbot</projectUrl>   
-		<repository url="https://github.com/granstel/Templates.Chatbot" />
+		<projectUrl>https://github.com/granstel/Templates.Chatbot</projectUrl>
+		<repository type="Github" url="https://github.com/granstel/Templates.Chatbot" />
 		<description>Chat bot template for messengers</description>
-		<releaseNotes>Fix repositury url</releaseNotes>
-		<tags>Chatbot</tags>
+		<releaseNotes>Omit null or empty incoming token, Replace internal yandex models for Yandex.Dialogs.Models package</releaseNotes>
+		<tags>Yandex, Dialogs, Models</tags>
+		<license type="file">LICENSE</license>
 		<packageTypes>
 			<packageType name="Template" />
 		</packageTypes>
 	</metadata>
 	<files>
 		<file src=".\src\**\*.*" target="content" exclude="**\bin\**\*.*;**\obj\**\*.*;**\.vs\**\*.*" />
+		<file src=".\LICENSE" />
 	</files>
 </package>
