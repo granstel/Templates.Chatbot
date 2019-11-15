@@ -51,7 +51,7 @@ namespace GranSteL.Chatbot.Api
         {
             var result = new List<string>();
 
-            var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll");
+            var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "GranSteL.Chatbot*.dll");
 
             foreach (var file in files)
             {
