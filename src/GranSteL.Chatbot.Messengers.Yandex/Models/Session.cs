@@ -1,18 +1,18 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace GranSteL.Chatbot.Models.Yandex
+namespace GranSteL.Chatbot.Messengers.Yandex.Models
 {
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class OutputModel
+    public class Session
     {
         [JsonProperty]
-        public Response Response { get; set; }
+        public string SessionId { get; set; }
 
         [JsonProperty]
-        public Session Session { get; set; }
+        public int MessageId { get; set; }
 
         [JsonProperty]
-        public string Version { get; set; }
+        public string UserId { get; set; }
     }
 }

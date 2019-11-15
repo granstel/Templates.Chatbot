@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AutoFixture;
 using AutoMapper;
-using GranSteL.Chatbot.Models.Yandex;
+using GranSteL.Chatbot.Messengers.Yandex.Models;
 using GranSteL.Chatbot.Services;
 using Moq;
 using NUnit.Framework;

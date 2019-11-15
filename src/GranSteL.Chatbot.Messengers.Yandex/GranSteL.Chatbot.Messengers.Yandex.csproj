@@ -16,4 +16,8 @@
     <ProjectReference Include="..\GranSteL.Chatbot.Messengers\GranSteL.Chatbot.Messengers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

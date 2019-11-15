@@ -1,8 +1,9 @@
 using System;
 using AutoMapper;
+using GranSteL.Chatbot.Messengers.Yandex.Models;
 using GranSteL.Chatbot.Models.Internal;
-using GranSteL.Chatbot.Models.Yandex;
 using Internal = GranSteL.Chatbot.Models.Internal;
+using Response = GranSteL.Chatbot.Messengers.Yandex.Models.Response;
 
 namespace GranSteL.Chatbot.Messengers.Yandex
 {
@@ -24,7 +25,7 @@ namespace GranSteL.Chatbot.Messengers.Yandex
                 .ForMember(d => d.Session, m => m.MapFrom(s => s))
                 .ForMember(d => d.Version, m => m.Ignore());
 
-            CreateMap<Internal.Response, Models.Yandex.Response>()
+            CreateMap<Internal.Response, Response>()
                 .ForMember(d => d.Text, m => m.MapFrom(s => s.ResponseText.Replace(Environment.NewLine, "\n")))
                 .ForMember(d => d.Tts, m => m.MapFrom(s => s.AlternativeText.Replace(Environment.NewLine, "\n")))
                 .ForMember(d => d.EndSession, m => m.MapFrom(s => s.Finished))

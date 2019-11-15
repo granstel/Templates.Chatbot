@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using GranSteL.Chatbot.Models.Yandex;
+using GranSteL.Chatbot.Messengers.Yandex.Models;
 using GranSteL.Chatbot.Services;
 using Internal = GranSteL.Chatbot.Models.Internal;
 

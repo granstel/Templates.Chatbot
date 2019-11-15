@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace GranSteL.Chatbot.Models.Yandex
+namespace GranSteL.Chatbot.Messengers.Yandex.Models
 {
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class InputSession : Session
+    public class Request
     {
         [JsonProperty]
-        public bool New { get; set; }
-
-        [JsonProperty]
-        public string SkillId { get; set; }
+        public string OriginalUtterance {get; set;}
     }
 }
