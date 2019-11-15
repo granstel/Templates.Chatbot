@@ -50,7 +50,7 @@ namespace GranSteL.Chatbot.Messengers.Tests.Controllers
         }
 
         [Test]
-        public void OnActionExecuting_NullConfigurationToken_NotFound()
+        public void OnActionExecuting_NullConfigurationToken_NullResult()
         {
             var token = Fixture.Create<string>();
 
@@ -64,7 +64,7 @@ namespace GranSteL.Chatbot.Messengers.Tests.Controllers
             Target.OnActionExecuting(context);
 
 
-            Assert.True(context.Result is NotFoundResult);
+            Assert.Null(context.Result);
         }
 
         [Test]

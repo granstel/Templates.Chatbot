@@ -73,6 +73,11 @@ namespace GranSteL.Chatbot.Messengers
 
         protected virtual bool IsValidRequest(ActionExecutingContext context)
         {
+            if (string.IsNullOrEmpty(_configuration.IncomingToken))
+            {
+                return true;
+            }
+
             if (context.ActionArguments.TryGetValue(TokenParameter, out object value))
             {
                 var token = value as string;
