@@ -21,7 +21,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
 
         protected override async Task<string> AfterAsync(Message input, Response response)
         {
-            var answer = response.ResponseText;
+            var answer = response.Text;
 
             await SendTextMessageAsync(long.Parse(response.ChatHash), answer);
 

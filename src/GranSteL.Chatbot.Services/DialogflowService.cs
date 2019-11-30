@@ -1,51 +1,65 @@
 ﻿using System;
-using System.Linq;
-using ApiAiSDK;
+using System.Threading.Tasks;
+using AutoMapper;
+using Google.Cloud.Dialogflow.V2;
+using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Services.Configuration;
+using GranSteL.Chatbot.Services.Extensions;
+using NLog;
 
 namespace GranSteL.Chatbot.Services
 {
     public class DialogflowService : IDialogflowService
     {
-        private readonly IApiAi _dialogflowClient;
+        private readonly Logger _log = LogManager.GetLogger(nameof(DialogflowService));
 
-        public DialogflowService(IApiAi dialogflowClient)
+        private readonly Sessions.SessionsClient _dialogflowClient;
+        private readonly DialogflowConfiguration _configuration;
+        private readonly IMapper _mapper;
+
+        public DialogflowService(Sessions.SessionsClient dialogflowClient, DialogflowConfiguration configuration)
         {
             _dialogflowClient = dialogflowClient;
+            _configuration = configuration;
         }
 
-        public string GetGreeting(string name)
+        public async Task<Dialog> GetResponseAsync(Request request)
         {
-            throw new NotImplementedException();
+            var intentRequest = CreateQuery(request);
+
+            _log.Trace($"Request:{Environment.NewLine}{intentRequest.Serialize()}");
+
+            var intentResponse = await _dialogflowClient.DetectIntentAsync(intentRequest);
+
+            _log.Trace($"Response:{Environment.NewLine}{intentResponse.Serialize()}");
+
+            var queryResult = intentResponse.QueryResult;
+
+            var response = _mapper.Map<Dialog>(queryResult);
+
+            return response;
         }
 
-        public string GetCity(string requestMessageText)
+        private DetectIntentRequest CreateQuery(Request request)
         {
-            var response = _dialogflowClient.TextRequest(requestMessageText);
+            var session = new SessionName(_configuration.ProjectId, request.SessionId);
 
-            var cityName = response.Result.Parameters?
-                .Where(p => string.Equals("geo-city", p.Key))
-                .Select(p => p.Value as string)
-                .FirstOrDefault();
-
-
-            return cityName ?? requestMessageText;
-        }
-
-        public DateTime? GetDate(string requestMessageText)
-        {
-            var response = _dialogflowClient.TextRequest(requestMessageText);
-
-            var dateString = response.Result.Parameters?
-                .Where(p => string.Equals("date", p.Key))
-                .Select(p => p.Value as string)
-                .FirstOrDefault();
-
-            if (DateTime.TryParse(dateString, out var date))
+            var query = new QueryInput
             {
-                return date;
-            }
+                Text = new TextInput
+                {
+                    Text = request.Text,
+                    LanguageCode = _configuration.LanguageCode
+                },
+            };
 
-            return null;
+            var intentRequest = new DetectIntentRequest
+            {
+                SessionAsSessionName = session,
+                QueryInput = query
+            };
+
+            return intentRequest;
         }
     }
 }

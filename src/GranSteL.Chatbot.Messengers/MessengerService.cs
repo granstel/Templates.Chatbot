@@ -27,13 +27,24 @@ namespace GranSteL.Chatbot.Messengers
         {
             var request = Before(input);
 
-            var response = await _conversationService.GetResponseAsync(request);
+            var response = ProcessCommand(request);
+
+            // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
+            if (response == null)
+            {
+                response = await _conversationService.GetResponseAsync(request);
+            }
 
             _mapper.Map(request, response);
 
             var output = await AfterAsync(input, response);
 
             return output;
+        }
+
+        protected virtual Response ProcessCommand(Request request)
+        {
+            return null;
         }
 
         protected virtual async Task<TOutput> AfterAsync(TInput input, Response response)

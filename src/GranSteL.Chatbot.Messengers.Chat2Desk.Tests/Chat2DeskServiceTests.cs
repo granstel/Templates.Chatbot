@@ -59,7 +59,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
             var chatId = _fixture.Create<long>();
 
             var response = _fixture.Build<Response>()
-                .With(r => r.ResponseText)
+                .With(r => r.Text)
                 .With(r => r.ChatHash, chatId.ToString())
                 .OmitAutoProperties()
                 .Create();
@@ -88,7 +88,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
             var chatId = _fixture.Create<long>();
 
             var response = _fixture.Build<Response>()
-                .With(r => r.ResponseText)
+                .With(r => r.Text)
                 .With(r => r.ChatHash, chatId.ToString())
                 .OmitAutoProperties()
                 .Create();
@@ -118,7 +118,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
             var chatId = _fixture.Create<long>();
 
             var response = _fixture.Build<Response>()
-                .With(r => r.ResponseText)
+                .With(r => r.Text)
                 .With(r => r.ChatHash, chatId.ToString())
                 .OmitAutoProperties()
                 .Create();

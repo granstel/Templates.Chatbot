@@ -52,7 +52,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram.Tests
 
             Assert.AreEqual((update.Message?.Chat?.Id).GetValueOrDefault().ToString(), result.ChatHash);
             Assert.AreEqual((update.Message?.From?.Id).GetValueOrDefault().ToString(), result.UserHash);
-            Assert.AreEqual(update.Message?.Text, result.RequestText);
+            Assert.AreEqual(update.Message?.Text, result.Text);
             Assert.AreEqual(Source.Telegram, result.Source);
         }
     }

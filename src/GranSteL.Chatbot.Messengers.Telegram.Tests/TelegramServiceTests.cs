@@ -76,7 +76,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram.Tests
             var chatId = _fixture.Create<long>();
 
             var response = _fixture.Build<Response>()
-                .With(r => r.ResponseText)
+                .With(r => r.Text)
                 .With(r => r.ChatHash, chatId.ToString())
                 .OmitAutoProperties()
                 .Create();

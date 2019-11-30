@@ -6,7 +6,7 @@ namespace GranSteL.Chatbot.Models.Internal
 
         public string UserHash { get; set; }
 
-        public string ResponseText { get; set; }
+        public string Text { get; set; }
 
         public string AlternativeText { get; set; }
 

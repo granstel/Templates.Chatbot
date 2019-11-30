@@ -17,7 +17,7 @@ namespace GranSteL.Chatbot.Messengers.Yandex
             CreateMap<InputModel, Internal.Request>()
                 .ForMember(d => d.ChatHash, m => m.ResolveUsing(s => s.Session?.SkillId))
                 .ForMember(d => d.UserHash, m => m.ResolveUsing(s => s.Session?.UserId))
-                .ForMember(d => d.RequestText, m => m.ResolveUsing(s => s.Request?.OriginalUtterance))
+                .ForMember(d => d.Text, m => m.ResolveUsing(s => s.Request?.OriginalUtterance))
                 .ForMember(d => d.Source, m => m.UseValue(Source.Yandex));
 
             CreateMap<Internal.Response, OutputModel>()
@@ -27,7 +27,7 @@ namespace GranSteL.Chatbot.Messengers.Yandex
                 .ForMember(d => d.StartAccountLinking, m => m.Ignore());
 
             CreateMap<Internal.Response, YandexModels.Response>()
-                .ForMember(d => d.Text, m => m.MapFrom(s => s.ResponseText.Replace(Environment.NewLine, "\n")))
+                .ForMember(d => d.Text, m => m.MapFrom(s => s.Text.Replace(Environment.NewLine, "\n")))
                 .ForMember(d => d.Tts, m => m.MapFrom(s => s.AlternativeText.Replace(Environment.NewLine, "\n")))
                 .ForMember(d => d.EndSession, m => m.MapFrom(s => s.Finished))
                 .ForMember(d => d.Buttons, m => m.Ignore());

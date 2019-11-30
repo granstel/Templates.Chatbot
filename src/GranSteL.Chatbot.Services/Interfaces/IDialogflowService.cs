@@ -1,13 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
+using GranSteL.Chatbot.Models.Internal;
 
 namespace GranSteL.Chatbot.Services
 {
     public interface IDialogflowService
     {
-        string GetGreeting(string name);
-
-        string GetCity(string requestMessageText);
-
-        DateTime? GetDate(string requestMessageText);
+        Task<Dialog> GetResponseAsync(Request request);
     }
 }

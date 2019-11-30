@@ -59,7 +59,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram
 
         protected override async Task<string> AfterAsync(Update input, Response response)
         {
-            var answer = response.ResponseText;
+            var answer = response.Text;
 
             await SendTextMessageAsync(long.Parse(response.ChatHash), answer);
 
