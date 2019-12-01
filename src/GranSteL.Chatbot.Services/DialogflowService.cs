@@ -13,14 +13,15 @@ namespace GranSteL.Chatbot.Services
     {
         private readonly Logger _log = LogManager.GetLogger(nameof(DialogflowService));
 
-        private readonly Sessions.SessionsClient _dialogflowClient;
+        private readonly SessionsClient _dialogflowClient;
         private readonly DialogflowConfiguration _configuration;
         private readonly IMapper _mapper;
 
-        public DialogflowService(Sessions.SessionsClient dialogflowClient, DialogflowConfiguration configuration)
+        public DialogflowService(SessionsClient dialogflowClient, DialogflowConfiguration configuration, IMapper mapper)
         {
             _dialogflowClient = dialogflowClient;
             _configuration = configuration;
+            _mapper = mapper;
         }
 
         public async Task<Dialog> GetResponseAsync(Request request)

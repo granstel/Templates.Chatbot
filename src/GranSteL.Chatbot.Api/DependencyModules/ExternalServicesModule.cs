@@ -1,8 +1,10 @@
-﻿using ApiAiSDK;
-using Autofac;
+﻿using Autofac;
+using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Dialogflow.V2;
 using GranSteL.Chatbot.Services;
 using GranSteL.Chatbot.Services.Clients;
 using GranSteL.Chatbot.Services.Configuration;
+using Grpc.Auth;
 using RestSharp;
 
 namespace GranSteL.Chatbot.Api.DependencyModules
@@ -15,19 +17,21 @@ namespace GranSteL.Chatbot.Api.DependencyModules
             
             builder.RegisterType<QnaClient>().As<IQnaClient>();
             
-            builder.Register(RegisterDialogflowClient).As<IApiAi>();
+            builder.Register(RegisterDialogflowClient).As<SessionsClient>();
 
         }
 
-        private IApiAi RegisterDialogflowClient(IComponentContext context)
+        private SessionsClient RegisterDialogflowClient(IComponentContext context)
         {
             var configuration = context.Resolve<DialogflowConfiguration>();
 
-            var config = new AIConfiguration(configuration.Token, SupportedLanguage.Russian);
+            var credential = GoogleCredential.FromFile(configuration.JsonPath).CreateScoped(SessionsClient.DefaultScopes);
 
-            var ai = new ApiAi(config);
+            var channel = new Grpc.Core.Channel(SessionsClient.DefaultEndpoint.ToString(), credential.ToChannelCredentials());
 
-            return ai;
+            var client = SessionsClient.Create(channel);
+
+            return client;
         }
     }
 }
