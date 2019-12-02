@@ -18,6 +18,9 @@ namespace GranSteL.Chatbot.Messengers.Yandex
                 .ForMember(d => d.ChatHash, m => m.ResolveUsing(s => s.Session?.SkillId))
                 .ForMember(d => d.UserHash, m => m.ResolveUsing(s => s.Session?.UserId))
                 .ForMember(d => d.Text, m => m.ResolveUsing(s => s.Request?.OriginalUtterance))
+                .ForMember(d => d.SessionId, m => m.ResolveUsing(s => s.Session?.SessionId))
+                .ForMember(d => d.NewSession, m => m.ResolveUsing(s => s.Session?.New))
+                .ForMember(d => d.Language, m => m.ResolveUsing(s => s.Meta?.Locale))
                 .ForMember(d => d.Source, m => m.UseValue(Source.Yandex));
 
             CreateMap<Internal.Response, OutputModel>()

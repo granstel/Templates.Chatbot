@@ -11,8 +11,11 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
             CreateMap<Message, Request>()
                 .ForMember(d => d.ChatHash, m => m.MapFrom(s => s.ClientId))
                 .ForMember(d => d.UserHash, m => m.MapFrom(s => s.ClientId))
+                .ForMember(d => d.SessionId, m => m.MapFrom(s => s.ClientId))
                 .ForMember(d => d.Text, m => m.MapFrom(s => s.Text))
-                .ForMember(d => d.Source, m => m.UseValue(Source.Chat2Desk));
+                .ForMember(d => d.Source, m => m.UseValue(Source.Chat2Desk))
+                .ForMember(d => d.Language, m => m.Ignore())
+                .ForMember(d => d.NewSession, m => m.Ignore());
 
             CreateMap<Response, Message>()
                 .ForMember(d => d.ClientId, m => m.MapFrom(s => s.ChatHash))

@@ -5,14 +5,14 @@ using NUnit.Framework;
 namespace GranSteL.Chatbot.Services.Tests.MappingProfiles
 {
     [TestFixture]
-    public class InternalProfileTests
+    public class DialogflowProfileTests
     {
         private IMapper _target;
 
         [SetUp]
         public void InitTest()
         {
-            _target = new Mapper(new MapperConfiguration(c => c.AddProfile<InternalProfile>()));
+            _target = new Mapper(new MapperConfiguration(c => c.AddProfile<DialogflowProfile>()));
         }
 
         [Test]
