@@ -12,10 +12,15 @@ namespace GranSteL.Chatbot.Services.Mapping
         public DialogflowProfile()
         {
             CreateMap<QueryResult, Dialog>()
-                .ForMember(d => d.EndConversation, m => m.MapFrom(s => s.Intent.ResetContexts))
                 .ForMember(d => d.Parameters, m => m.MapFrom(s => GetParameters(s)))
                 .ForMember(d => d.Response, m => m.MapFrom(s => s.FulfillmentText))
-                .ForMember(d => d.ParametersIncomplete, m => m.MapFrom(s => !s.AllRequiredParamsPresent));
+                .ForMember(d => d.ParametersIncomplete, m => m.MapFrom(s => !s.AllRequiredParamsPresent))
+                .ForMember(d => d.EndConversation, m => m.Ignore())
+                .AfterMap((s, d) =>
+                {
+                    d.EndConversation = s.DiagnosticInfo?.Fields?.Where(f => string.Equals(f.Key, "end_conversation"))
+                                            .Select(f => f.Value.BoolValue).FirstOrDefault() ?? false;
+                });
         }
 
         private IDictionary<string, string> GetParameters(QueryResult queryResult)
