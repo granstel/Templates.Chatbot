@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using GranSteL.Chatbot.Services;
 using GranSteL.Chatbot.Services.Serialization;
+using GranSteL.Helpers.Redis;
 
 namespace GranSteL.Chatbot.Api.DependencyModules
 {
@@ -11,7 +12,7 @@ namespace GranSteL.Chatbot.Api.DependencyModules
             builder.RegisterType<ConversationService>().As<IConversationService>();
             builder.RegisterType<QnaService>().As<IQnaService>();
             builder.RegisterType<DialogflowService>().As<IDialogflowService>();
-            builder.RegisterType<RedisCacheService>().As<ICacheService>();
+            builder.RegisterType<RedisCacheService>().As<IRedisCacheService>();
             builder.RegisterType<CustomJsonSerializer>().AsSelf();
         }
     }
