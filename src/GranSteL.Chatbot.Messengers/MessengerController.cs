@@ -43,7 +43,7 @@ namespace GranSteL.Chatbot.Messengers
             return $"{DateTime.Now:F} {url}";
         }
 
-        [HttpPost("{token}")]
+        [HttpPost("{token?}")]
         public virtual async Task<IActionResult> WebHook([FromBody]TInput input, string token)
         {
             _log.Info(input.Serialize());
@@ -53,7 +53,7 @@ namespace GranSteL.Chatbot.Messengers
             return Json(response);
         }
 
-        [HttpPut("{token}")]
+        [HttpPut("{token?}")]
         public virtual async Task<IActionResult> CreateWebHook(string token)
         {
             var url = this.GetWebHookUrl();
@@ -63,7 +63,7 @@ namespace GranSteL.Chatbot.Messengers
             return Json(result);
         }
 
-        [HttpDelete("{token}")]
+        [HttpDelete("{token?}")]
         public virtual async Task<IActionResult> DeleteWebHook(string token)
         {
             var result = await _messengerService.DeleteWebhookAsync();
