@@ -1,4 +1,3 @@
-    
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "GranSteL",
@@ -12,4 +11,60 @@
   },
   "sourceName": "GranSteL.Chatbot", // Will replace the string 'MyStartup' with the value provided via -n.
   "preferNameDirectory": true, // If -n is not specified, will use name of the current directory
+  "symbols":{
+    "telegram": {
+        "type": "parameter",
+        "datatype": "bool",
+        "defaultValue": "false"
+    },
+	"yandex": {
+        "type": "parameter",
+        "datatype": "bool",
+        "defaultValue": "false"
+    },
+	"chat2desk": {
+        "type": "parameter",
+        "datatype": "bool",
+        "defaultValue": "false"
+    },
+  },
+  "sources":[{
+    "modifiers": [
+	  {
+      "condition": "(!telegram)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Telegram/**/*"]
+      },
+	  {
+      "condition": "(!telegram)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Telegram.Tests/**/*"]
+      },
+	  {
+      "condition": "(!yandex)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Yandex/**/*"]
+      },
+	  {
+      "condition": "(!yandex)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Yandex.Tests/**/*"]
+      },
+	  {
+      "condition": "(!chat2desk)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk/**/*"]
+      },
+	  {
+      "condition": "(!chat2desk)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk.Tests/**/*"]
+      },
+    ]
+  }],
+  "postActions": [{
+    "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+	"condition": "(telegram)",
+	"manualInstructions": [{ 
+       "text": "Add projects for messengers to main project (*.Api)" 
+       }],
+    "referenceType": "project",
+	"reference":"**/*.Messengers.Telegram.csproj",
+    "projectFileExtensions":"**/*.Api.csproj",
+    "description ": "test"
+  }]
 }
