@@ -12,6 +12,24 @@
   "sourceName": "GranSteL.Chatbot", // Will replace the string 'MyStartup' with the value provided via -n.
   "preferNameDirectory": true, // If -n is not specified, will use name of the current directory
   "symbols":{
+    "Messengers":{
+      "type":"parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "telegram",
+          "description": "Telegram"
+        },
+        {
+          "choice": "yandex",
+          "description":"Yandex dialogs"
+        },
+        {
+          "choice":"chat2desk",
+          "description":"Chat2Desk"
+        }
+      ]
+    },
     "telegram": {
         "type": "parameter",
         "datatype": "bool",
@@ -55,16 +73,5 @@
       "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk.Tests/**/*"]
       },
     ]
-  }],
-  "postActions": [{
-    "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
-	"condition": "(telegram)",
-	"manualInstructions": [{ 
-       "text": "Add projects for messengers to main project (*.Api)" 
-       }],
-    "referenceType": "project",
-	"reference":"**/*.Messengers.Telegram.csproj",
-    "projectFileExtensions":"**/*.Api.csproj",
-    "description ": "test"
   }]
 }
