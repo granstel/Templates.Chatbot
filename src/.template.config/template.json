@@ -27,38 +27,42 @@
         "datatype": "bool",
         "defaultValue": "false"
     },
+	"all": {
+		"type": "computed",
+		"value": "(!telegram && !yandex && !chat2desk)"
+    }
   },
   "sources":[{
     "modifiers": [
 	  {
-      "condition": "(!telegram)",
+      "condition": "(!all & !telegram)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Telegram/**/*"]
       },
 	  {
-      "condition": "(!telegram)",
+      "condition": "(!all & !telegram)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Telegram.Tests/**/*"]
       },
 	  {
-      "condition": "(!yandex)",
+      "condition": "(!all & !yandex)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Yandex/**/*"]
       },
 	  {
-      "condition": "(!yandex)",
+      "condition": "(!all & !yandex)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Yandex.Tests/**/*"]
       },
 	  {
-      "condition": "(!chat2desk)",
+      "condition": "(!all & !chat2desk)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk/**/*"]
       },
 	  {
-      "condition": "(!chat2desk)",
+      "condition": "(!all & !chat2desk)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk.Tests/**/*"]
       },
     ]
   }],
   "postActions": [{
     "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-	"condition": "(telegram)",
+	"condition": "(all || telegram)",
     "args": {
       "executable": "AddTelegram.cmd",
       "args": ""
@@ -71,7 +75,7 @@
   },
   {
     "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-	"condition": "(yandex)",
+	"condition": "(all || yandex)",
     "args": {
       "executable": "AddYandex.cmd",
       "args": ""
@@ -84,7 +88,7 @@
   },
   {
     "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-	"condition": "(chat2desk)",
+	"condition": "(all || chat2desk)",
     "args": {
       "executable": "AddChat2Desk.cmd",
       "args": ""
