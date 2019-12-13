@@ -12,24 +12,6 @@
   "sourceName": "GranSteL.Chatbot", // Will replace the string 'MyStartup' with the value provided via -n.
   "preferNameDirectory": true, // If -n is not specified, will use name of the current directory
   "symbols":{
-    "Messengers":{
-      "type":"parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "telegram",
-          "description": "Telegram"
-        },
-        {
-          "choice": "yandex",
-          "description":"Yandex dialogs"
-        },
-        {
-          "choice":"chat2desk",
-          "description":"Chat2Desk"
-        }
-      ]
-    },
     "telegram": {
         "type": "parameter",
         "datatype": "bool",
@@ -73,5 +55,17 @@
       "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk.Tests/**/*"]
       },
     ]
+  }],
+  "postActions": [{
+    "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+    "args": {
+      "executable": "AddTelegram.cmd",
+      "args": ""
+    },
+    "manualInstructions": [{ 
+       "text": "Run 'AddTelegram.cmd'" 
+       }],
+    "continueOnError": false,
+    "description ": "setups the project by calling setup.cmd"
   }]
 }
