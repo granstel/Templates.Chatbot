@@ -58,6 +58,7 @@
   }],
   "postActions": [{
     "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+	"condition": "(telegram)",
     "args": {
       "executable": "AddTelegram.cmd",
       "args": ""
@@ -66,6 +67,44 @@
        "text": "Run 'AddTelegram.cmd'" 
        }],
     "continueOnError": false,
-    "description ": "setups the project by calling setup.cmd"
+    "description ": "Add reference to Telegram project at main project (*.Api)"
+  },
+  {
+    "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+	"condition": "(yandex)",
+    "args": {
+      "executable": "AddYandex.cmd",
+      "args": ""
+    },
+    "manualInstructions": [{ 
+       "text": "Run 'AddYandex.cmd'" 
+       }],
+    "continueOnError": false,
+    "description ": "Add reference to Yandex project at main project (*.Api)"
+  },
+  {
+    "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+	"condition": "(chat2desk)",
+    "args": {
+      "executable": "AddChat2Desk.cmd",
+      "args": ""
+    },
+    "manualInstructions": [{ 
+       "text": "Run 'AddChat2Desk.cmd'" 
+       }],
+    "continueOnError": false,
+    "description ": "Add reference to Chat2Desk project at main project (*.Api)"
+  },
+  {
+    "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+    "args": {
+      "executable": "cmd",
+      "args": "del *.cmd"
+    },
+    "manualInstructions": [{ 
+       "text": "Delete *.cmd files" 
+       }],
+    "continueOnError": false,
+    "description ": "Delete *.cmd files"
   }]
 }
