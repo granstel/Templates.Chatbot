@@ -11,5 +11,7 @@ namespace GranSteL.Chatbot.Models.Internal
         public bool ParametersIncomplete { get; set; }
 
         public string Response { get; set; }
+
+        public string Action { get; set; }
     }
 }
