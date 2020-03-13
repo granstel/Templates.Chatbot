@@ -15,7 +15,7 @@ namespace GranSteL.Chatbot.Messengers
         private readonly IMessengerService<TInput, TOutput> _messengerService;
         private readonly MessengerConfiguration _configuration;
         
-        private readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private readonly Logger _log;
 
         private const string TokenParameter = "token";
 
@@ -23,6 +23,8 @@ namespace GranSteL.Chatbot.Messengers
         {
             _messengerService = messengerService;
             _configuration = configuration;
+
+            _log = LogManager.GetLogger(GetType().Name);
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
