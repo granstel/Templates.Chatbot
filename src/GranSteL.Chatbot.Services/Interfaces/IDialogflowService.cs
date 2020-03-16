@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GranSteL.Chatbot.Models.Internal;
 
 namespace GranSteL.Chatbot.Services
