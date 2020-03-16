@@ -6,6 +6,7 @@ using GranSteL.Chatbot.Services.Clients;
 using GranSteL.Chatbot.Services.Configuration;
 using Grpc.Auth;
 using RestSharp;
+using StackExchange.Redis;
 
 namespace GranSteL.Chatbot.Api.DependencyModules
 {
@@ -19,6 +20,7 @@ namespace GranSteL.Chatbot.Api.DependencyModules
             
             builder.Register(RegisterDialogflowClient).As<SessionsClient>();
 
+            builder.Register(RegisterRedisClient).As<IDatabase>().SingleInstance();
         }
 
         private SessionsClient RegisterDialogflowClient(IComponentContext context)
@@ -32,6 +34,17 @@ namespace GranSteL.Chatbot.Api.DependencyModules
             var client = SessionsClient.Create(channel);
 
             return client;
+        }
+
+        private IDatabase RegisterRedisClient(IComponentContext context)
+        {
+            var configuration = context.Resolve<RedisConfiguration>();
+
+            var redisClient = ConnectionMultiplexer.Connect(configuration.ConnectionString);
+
+            var dataBase = redisClient.GetDatabase();
+
+            return dataBase;
         }
     }
 }

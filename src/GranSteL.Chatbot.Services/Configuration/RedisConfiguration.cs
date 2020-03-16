@@ -2,12 +2,14 @@
 {
     public class RedisConfiguration : Configuration
     {
-        private string _redisConnectionString;
+        private string _connectionString;
 
-        public string RedisConnectionString
+        public string ConnectionString
         {
-            get => _redisConnectionString;
-            set => _redisConnectionString = ExpandVariable(value);
+            get => _connectionString;
+            set => _connectionString = ExpandVariable(value);
         }
+
+        public string KeyPrefix { get; set; }
     }
 }
