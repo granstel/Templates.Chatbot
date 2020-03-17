@@ -29,9 +29,6 @@ namespace GranSteL.Chatbot.Api.Middleware
         // ReSharper disable once UnusedMember.Global
         public async Task InvokeAsync(HttpContext context)
         {
-            if (!_configuration.Enabled)
-                return;
-
             var requestId = Guid.NewGuid().ToString("N");
 
             _log.SetProperty("RequestId", requestId);

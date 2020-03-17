@@ -27,12 +27,11 @@ namespace GranSteL.Chatbot.Api
             containerBuilder.RegisterInstance(configuration.Redis).SingleInstance();
             containerBuilder.RegisterInstance(configuration.Dialogflow).SingleInstance();
 
-            var names = GetAssembliesNames();
-
             containerBuilder.RegisterModule<InternalServicesModule>();
             containerBuilder.RegisterModule<ExternalServicesModule>();
-            containerBuilder.RegisterModule(new MappingModule(names));
 
+            var names = GetAssembliesNames();
+            containerBuilder.RegisterModule(new MappingModule(names));
             RegisterFromMessengersAssemblies(containerBuilder, names);
 
             return containerBuilder.Build();
