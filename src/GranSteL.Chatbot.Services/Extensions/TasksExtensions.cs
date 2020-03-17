@@ -20,13 +20,13 @@ namespace GranSteL.Chatbot.Services.Extensions
             {
                 try
                 {
-                    await task;
+                    await task.ConfigureAwait(false);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e, "Error while executing the task");
                 }
-            });
+            }).ConfigureAwait(false);
         }
     }
 }

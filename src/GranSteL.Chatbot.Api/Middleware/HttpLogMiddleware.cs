@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GranSteL.Chatbot.Api.Exceptions;
+using GranSteL.Chatbot.Services.Configuration;
 using GranSteL.Chatbot.Services.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
@@ -13,17 +15,21 @@ namespace GranSteL.Chatbot.Api.Middleware
     public class HttpLogMiddleware
     {
         private readonly RequestDelegate _next;
-
+        private readonly HttpLogConfiguration _configuration;
         private readonly Logger _log = LogManager.GetCurrentClassLogger();
 
-        public HttpLogMiddleware(RequestDelegate next)
+        public HttpLogMiddleware(RequestDelegate next, HttpLogConfiguration configuration)
         {
             _next = next;
+            _configuration = configuration;
         }
 
         // ReSharper disable once UnusedMember.Global
         public async Task InvokeAsync(HttpContext context)
         {
+            if (!_configuration.Enabled)
+                return;
+
             await LogRequest(context.Request);
 
             var responseBody = context.Response.Body;
@@ -49,9 +55,25 @@ namespace GranSteL.Chatbot.Api.Middleware
 
         private async Task LogRequest(HttpRequest request)
         {
-            _log.SetProperty("Type", "Request");
-
             var builder = new StringBuilder();
+
+            try
+            {
+                if (request.ContentLength > 0)
+                {
+                    request.EnableRewind();
+
+                    await AddBodyAsync(builder, request.Body);
+                }
+            }
+            catch (ExcludeBodyException)
+            {
+                //Exclude body from log
+                return;
+            }
+
+            _log.SetProperty("Type", "Request");
+            _log.SetProperty("RequestId", Guid.NewGuid().ToString("N"));
 
             var method = request.Method;
             var queryString = request.QueryString;
@@ -68,13 +90,6 @@ namespace GranSteL.Chatbot.Api.Middleware
 
             AddHeaders(builder, request.Headers);
 
-            if (request.ContentLength > 0)
-            {
-                request.EnableRewind();
-
-                await AddBodyAsync(builder, request.Body);
-            }
-
             var message = builder.ToString();
 
             _log.Info(message);
@@ -84,9 +99,24 @@ namespace GranSteL.Chatbot.Api.Middleware
 
         private async Task LogResponse(HttpResponse response)
         {
-            _log.SetProperty("Type", "Response");
-
             var builder = new StringBuilder();
+
+            try
+            {
+                if (response.Body.Length > 0)
+                {
+                    response.Body.Seek(0, SeekOrigin.Begin);
+
+                    await AddBodyAsync(builder, response.Body);
+                }
+            }
+            catch (ExcludeBodyException)
+            {
+                //Exclude body from log
+                return;
+            }
+
+            _log.SetProperty("Type", "Response");
 
             var statusCode = response.StatusCode;
 
@@ -96,13 +126,6 @@ namespace GranSteL.Chatbot.Api.Middleware
             builder.AppendLine($"{response.ContentType}");
 
             AddHeaders(builder, response.Headers);
-
-            if (response.Body.Length > 0)
-            {
-                response.Body.Seek(0, SeekOrigin.Begin);
-
-                await AddBodyAsync(builder, response.Body);
-            }
 
             var message = builder.ToString();
 
@@ -138,6 +161,9 @@ namespace GranSteL.Chatbot.Api.Middleware
                     {
                         var content = reader.ReadToEnd();
 
+                        if (_configuration.ExcludeBodiesWithWords.Any(w => content.Contains(w, StringComparison.InvariantCultureIgnoreCase)))
+                            throw new ExcludeBodyException();
+
                         builder.AppendLine("Body: ");
                         builder.AppendLine(content);
                         _log.SetProperty("Body", content);
@@ -153,6 +179,7 @@ namespace GranSteL.Chatbot.Api.Middleware
         private void ClearProperties()
         {
             _log.SetProperty("Type", null);
+            _log.SetProperty("RequestId", null);
             _log.SetProperty("Headers", null);
             _log.SetProperty("Body", null);
             _log.SetProperty("Method", null);

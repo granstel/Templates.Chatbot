@@ -2,6 +2,8 @@
 {
     public class AppConfiguration
     {
+        public HttpLogConfiguration HttpLog { get; set; }
+
         public QnaConfiguration Qna { get; set; }
 
         public DialogflowConfiguration Dialogflow { get; set; }

@@ -22,6 +22,7 @@ namespace GranSteL.Chatbot.Api
             var configuration = appConfiguration.GetSection($"{nameof(AppConfiguration)}").Get<AppConfiguration>();
             
             containerBuilder.RegisterInstance(configuration).SingleInstance();
+            containerBuilder.RegisterInstance(configuration.HttpLog).SingleInstance();
             containerBuilder.RegisterInstance(configuration.Qna).SingleInstance();
             containerBuilder.RegisterInstance(configuration.Redis).SingleInstance();
             containerBuilder.RegisterInstance(configuration.Dialogflow).SingleInstance();
