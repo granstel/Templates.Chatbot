@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using GranSteL.Chatbot.Messengers.Extensions;
 using GranSteL.Chatbot.Services;
 using GranSteL.Chatbot.Services.Configuration;
-using GranSteL.Chatbot.Services.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NLog;
@@ -48,8 +47,6 @@ namespace GranSteL.Chatbot.Messengers
         [HttpPost("{token?}")]
         public virtual async Task<IActionResult> WebHook([FromBody]TInput input, string token)
         {
-            _log.Info(input.Serialize());
-
             var response = await _messengerService.ProcessIncomingAsync(input);
 
             return Json(response);
