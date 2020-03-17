@@ -181,6 +181,10 @@ namespace GranSteL.Chatbot.Api.Middleware
                     }
                 }
             }
+            catch (ExcludeBodyException)
+            {
+                throw;
+            }
             catch (Exception e)
             {
                 _log.Error(e, "Не удалось записать тело в лог");
