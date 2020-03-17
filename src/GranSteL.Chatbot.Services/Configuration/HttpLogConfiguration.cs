@@ -4,6 +4,8 @@
     {
         public bool Enabled { get; set; }
 
+        public bool AddRequestIdHeader { get; set; }
+
         public string[] ExcludeBodiesWithWords { get; set; }
     }
 }
