@@ -57,13 +57,15 @@ namespace GranSteL.Chatbot.Api.Middleware
         {
             var builder = new StringBuilder();
 
+            var body = default(string);
+
             try
             {
                 if (request.ContentLength > 0)
                 {
                     request.EnableRewind();
 
-                    await AddBodyAsync(builder, request.Body);
+                    await GetBodyAsync(builder, request.Body);
                 }
             }
             catch (ExcludeBodyException)
@@ -90,16 +92,25 @@ namespace GranSteL.Chatbot.Api.Middleware
 
             AddHeaders(builder, request.Headers);
 
+            if (!string.IsNullOrEmpty(body))
+            {
+                builder.AppendLine("Body: ");
+                builder.AppendLine(body);
+                _log.SetProperty("Body", body);
+            }
+
             var message = builder.ToString();
 
             _log.Info(message);
 
-            ClearProperties();
+            ClearProperties(false);
         }
 
         private async Task LogResponse(HttpResponse response)
         {
             var builder = new StringBuilder();
+
+            var body = default(string);
 
             try
             {
@@ -107,7 +118,7 @@ namespace GranSteL.Chatbot.Api.Middleware
                 {
                     response.Body.Seek(0, SeekOrigin.Begin);
 
-                    await AddBodyAsync(builder, response.Body);
+                    await GetBodyAsync(builder, response.Body);
                 }
             }
             catch (ExcludeBodyException)
@@ -127,11 +138,18 @@ namespace GranSteL.Chatbot.Api.Middleware
 
             AddHeaders(builder, response.Headers);
 
+            if (!string.IsNullOrEmpty(body))
+            {
+                builder.AppendLine("Body: ");
+                builder.AppendLine(body);
+                _log.SetProperty("Body", body);
+            }
+
             var message = builder.ToString();
 
             _log.Info(message);
 
-            ClearProperties();
+            ClearProperties(true);
         }
 
         private void AddHeaders(StringBuilder builder, IHeaderDictionary headers)
@@ -146,7 +164,7 @@ namespace GranSteL.Chatbot.Api.Middleware
             _log.SetProperty("Headers", dictionary);
         }
 
-        private async Task AddBodyAsync(StringBuilder builder, Stream body)
+        private async Task<string> GetBodyAsync(StringBuilder builder, Stream body)
         {
             try
             {
@@ -164,9 +182,7 @@ namespace GranSteL.Chatbot.Api.Middleware
                         if (_configuration.ExcludeBodiesWithWords.Any(w => content.Contains(w, StringComparison.InvariantCultureIgnoreCase)))
                             throw new ExcludeBodyException();
 
-                        builder.AppendLine("Body: ");
-                        builder.AppendLine(content);
-                        _log.SetProperty("Body", content);
+                        return content;
                     }
                 }
             }
@@ -174,18 +190,24 @@ namespace GranSteL.Chatbot.Api.Middleware
             {
                 _log.Error(e, "Не удалось записать тело в лог");
             }
+
+            return default;
         }
 
-        private void ClearProperties()
+        private void ClearProperties(bool clearRequestId)
         {
             _log.SetProperty("Type", null);
-            _log.SetProperty("RequestId", null);
             _log.SetProperty("Headers", null);
             _log.SetProperty("Body", null);
             _log.SetProperty("Method", null);
             _log.SetProperty("QueryString", null);
             _log.SetProperty("StatusCode", null);
             _log.SetProperty("User", null);
+
+            if(clearRequestId)
+            {
+                _log.SetProperty("RequestId", null);
+            }
         }
     }
 }
