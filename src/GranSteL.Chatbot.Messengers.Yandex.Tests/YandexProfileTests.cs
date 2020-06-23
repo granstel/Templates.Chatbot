@@ -2,6 +2,7 @@
 using AutoMapper;
 using NUnit.Framework;
 using Yandex.Dialogs.Models;
+using Yandex.Dialogs.Models.Input;
 
 namespace GranSteL.Chatbot.Messengers.Yandex.Tests
 {

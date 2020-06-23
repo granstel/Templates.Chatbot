@@ -5,6 +5,7 @@ using GranSteL.Chatbot.Services;
 using Moq;
 using NUnit.Framework;
 using Yandex.Dialogs.Models;
+using Yandex.Dialogs.Models.Input;
 using Internal = GranSteL.Chatbot.Models.Internal;
 
 namespace GranSteL.Chatbot.Messengers.Yandex.Tests
