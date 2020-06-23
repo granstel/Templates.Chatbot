@@ -9,6 +9,7 @@ using NLog;
 
 namespace GranSteL.Chatbot.Messengers
 {
+    [Route("[controller]")]
     public abstract class MessengerController<TInput, TOutput> : Controller
     {
         private readonly IMessengerService<TInput, TOutput> _messengerService;
