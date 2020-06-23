@@ -14,7 +14,8 @@ namespace GranSteL.Chatbot.Api.Middleware
 {
     public class HttpLogMiddleware
     {
-        private const string RequestIdHeaderName = "X-Request-Id";
+        private const string QueryIdHeaderName = "X-Query-Id";
+        private const string QueryIdLogProperty = "QueryId";
 
         private readonly RequestDelegate _next;
         private readonly HttpLogConfiguration _configuration;
@@ -29,14 +30,21 @@ namespace GranSteL.Chatbot.Api.Middleware
         // ReSharper disable once UnusedMember.Global
         public async Task InvokeAsync(HttpContext context)
         {
-            var requestId = Guid.NewGuid().ToString("N");
+            var queryId = Guid.NewGuid().ToString("N");
 
-            _log.SetProperty("RequestId", requestId);
+            _log.SetProperty(QueryIdLogProperty, queryId);
 
             if (_configuration.AddRequestIdHeader)
             {
-                context.Request.Headers.Add(RequestIdHeaderName, requestId);
-                context.Response.Headers.Add(RequestIdHeaderName, requestId);
+                if (!context.Request.Headers.ContainsKey(QueryIdHeaderName))
+                {
+                    context.Request.Headers.Add(QueryIdHeaderName, queryId);
+                }
+
+                if (!context.Response.Headers.ContainsKey(QueryIdHeaderName))
+                {
+                    context.Response.Headers.Add(QueryIdHeaderName, queryId);
+                }
             }
 
             await LogRequest(context.Request);
@@ -198,9 +206,9 @@ namespace GranSteL.Chatbot.Api.Middleware
             _log.SetProperty("StatusCode", null);
             _log.SetProperty("User", null);
 
-            if(clearRequestId)
+            if (clearRequestId)
             {
-                _log.SetProperty("RequestId", null);
+                _log.SetProperty(QueryIdLogProperty, null);
             }
         }
     }
