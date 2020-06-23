@@ -48,11 +48,11 @@ namespace GranSteL.Chatbot.Services
         {
             var intentRequest = CreateQuery(request);
 
-            _log.Trace($"Request:{Environment.NewLine}{intentRequest.Serialize()}");
+            _log.Trace($"Request:{System.Environment.NewLine}{intentRequest.Serialize()}");
 
             var intentResponse = await _dialogflowClient.DetectIntentAsync(intentRequest);
 
-            _log.Trace($"Response:{Environment.NewLine}{intentResponse.Serialize()}");
+            _log.Trace($"Response:{System.Environment.NewLine}{intentResponse.Serialize()}");
 
             var queryResult = intentResponse.QueryResult;
 
