@@ -1,7 +1,10 @@
 ﻿using AutoFixture;
+using AutoFixture.Kernel;
 using AutoMapper;
 using NUnit.Framework;
 using Yandex.Dialogs.Models;
+using Yandex.Dialogs.Models.Buttons;
+using Yandex.Dialogs.Models.Cards;
 using Yandex.Dialogs.Models.Input;
 
 namespace GranSteL.Chatbot.Messengers.Yandex.Tests
@@ -10,7 +13,7 @@ namespace GranSteL.Chatbot.Messengers.Yandex.Tests
     public class YandexProfileTests
     {
         private IMapper _target;
-                
+
         private Fixture _fixture;
 
         [SetUp]
@@ -19,6 +22,8 @@ namespace GranSteL.Chatbot.Messengers.Yandex.Tests
             _target = new Mapper(new MapperConfiguration(c => c.AddProfile<YandexProfile>()));
 
             _fixture = new Fixture();
+            _fixture.Customizations.Add(new TypeRelay(typeof(Button), typeof(ResponseButton)));
+            _fixture.Customizations.Add(new TypeRelay(typeof(ICard), typeof(ItemsListCard)));
         }
 
         [Test]
