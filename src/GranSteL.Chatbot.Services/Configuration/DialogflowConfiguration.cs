@@ -29,5 +29,7 @@
             get => _jsonPath;
             set => _jsonPath = ExpandVariable(value);
         }
+
+        public bool LogQuery { get; set; }
     }
 }
