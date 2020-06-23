@@ -47,6 +47,8 @@ namespace GranSteL.Chatbot.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware<ExceptionsMiddleware>();
+
             app.UseMvc();
         }
     }
