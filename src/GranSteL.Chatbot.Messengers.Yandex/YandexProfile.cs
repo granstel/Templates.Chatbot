@@ -2,7 +2,6 @@ using System;
 using AutoMapper;
 using GranSteL.Chatbot.Models.Internal;
 using Yandex.Dialogs.Models;
-using Yandex.Dialogs.Models.Input;
 using Internal = GranSteL.Chatbot.Models.Internal;
 using YandexModels = Yandex.Dialogs.Models;
 

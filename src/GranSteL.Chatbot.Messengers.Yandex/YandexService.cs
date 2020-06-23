@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using GranSteL.Chatbot.Services;
 using Yandex.Dialogs.Models;
-using Yandex.Dialogs.Models.Input;
 using Internal = GranSteL.Chatbot.Models.Internal;
 
 namespace GranSteL.Chatbot.Messengers.Yandex
