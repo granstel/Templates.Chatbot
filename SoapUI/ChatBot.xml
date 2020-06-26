@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="c6300724-787e-4702-9eef-48618449b825" activeEnvironment="Default" name="ChatBot" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project id="c6300724-787e-4702-9eef-48618449b825" activeEnvironment="Default" name="ChatBot" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config">
 	<con:settings/>
 	<con:interface xsi:type="con:RestService" id="da84df4c-fd29-45e2-91f2-b5e60ae44ce3" wadlVersion="http://wadl.dev.java.net/2009/02" name="GranSteL.ChatBot" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 		<con:settings/>
 		<con:definitionCache type="TEXT" rootPart=""/><con:endpoints>
-			<con:endpoint>http://localhost:19391/</con:endpoint>
+			<con:endpoint>http://localhost:1402/</con:endpoint>
 		</con:endpoints>
 		<con:resource name="Chat2Desk" path="/Chat2Desk" id="523e802f-708e-494f-bf96-fbea501d249a">
 			<con:settings/>
