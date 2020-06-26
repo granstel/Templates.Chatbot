@@ -3,15 +3,27 @@
 	<metadata>
 		<id>GranSteL.Templates.Chatbot</id>
 		<title>GranSteL.Templates.Chatbot</title>
-		<version>1.0.4</version>
+		<version>1.0.5</version>
 		<authors>GranSteL</authors>
 		<owners>GranSteL</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<projectUrl>https://github.com/granstel/Templates.Chatbot</projectUrl>
 		<repository type="Github" url="https://github.com/granstel/Templates.Chatbot" />
 		<description>Chat bot template for messengers</description>
-		<releaseNotes>fix server startup error: choose only self dlls</releaseNotes>
-		<tags>Yandex, Dialogs, Models</tags>
+		<releaseNotes>
+			898c231 Update Google.Cloud.Dialogflow.V2 to Version="3.0.0"
+			9c21c03 Add exampe of getting response from DF
+			663e1da Fix namespace for new version of Yandex.Dialogs.Model
+			d15f7bd LogQuery parameter at Dialogflow configuration
+			1760b23 Fix HttpLogMiddleware logging
+			f736dc2 add ExceptionMIddleware
+			01afe17 fix yandex mapping profile and tests
+			d5cf600 use Route("[controller]")
+			49049c4 Add messengers' project and test only by parameters
+			4d39d4d Group added projects by solution folders
+			03e4f06 change port at SoapUI examples
+		</releaseNotes>
+		<tags>Yandex, Telegram, Chat2Desk, Dialogs, Dialogflow, Models, Template</tags>
 		<license type="file">LICENSE</license>
 		<packageTypes>
 			<packageType name="Template" />
