@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Models", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Services", "GranSteL.Chatbot.Services\GranSteL.Chatbot.Services.csproj", "{795BC172-BD86-4A15-BBDD-A9696F7DEE27}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Tests", "0 - Tests", "{7550458D-AF2F-4233-BF54-49C36113F587}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7550458D-AF2F-4233-BF54-49C36113F587}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranSteL.Chatbot.Services.Tests", "GranSteL.Chatbot.Services.Tests\GranSteL.Chatbot.Services.Tests.csproj", "{0460EC82-4E93-4C91-8372-BF1CEFA51D91}"
 EndProject
