@@ -43,7 +43,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
 
             try
             {
-                var response = await _webClient.ExecuteTaskAsync(restRequest);
+                var response = await _webClient.ExecuteAsync(restRequest);
 
                 return response.StatusCode == HttpStatusCode.OK;
             }
@@ -68,7 +68,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
 
             try
             {
-                var response = await _webClient.ExecuteTaskAsync(restRequest);
+                var response = await _webClient.ExecuteAsync(restRequest);
 
                 return response.StatusCode == HttpStatusCode.OK;
             }
@@ -97,7 +97,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
 
             try
             {
-                var response = await _webClient.ExecuteTaskAsync(restRequest);
+                var response = await _webClient.ExecuteAsync(restRequest);
 
                 var info = response?.Content.Deserialize<SendInformation>();
 
