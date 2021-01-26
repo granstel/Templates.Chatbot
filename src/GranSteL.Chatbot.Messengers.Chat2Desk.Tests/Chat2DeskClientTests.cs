@@ -52,7 +52,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         {
             var request = default(IRestRequest);
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.SetWebhookAsync(It.IsAny<string>());
@@ -74,7 +76,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 
             _configuration.SetupGet(c => c.Token).Returns(token);
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.SetWebhookAsync(It.IsAny<string>());
@@ -93,7 +97,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 
             var url = _fixture.Create<string>();
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.SetWebhookAsync(url);
@@ -119,7 +125,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
                                .OmitAutoProperties()
                                .Create();
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(response);
 
 
             var result = await _target.SetWebhookAsync(It.IsAny<string>());
@@ -133,7 +141,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         [Test]
         public async Task SetWebHookAsync_Exception_Success()
         {
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Throws<Exception>();
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Throws<Exception>();
 
 
             var result = await _target.SetWebhookAsync(It.IsAny<string>());
@@ -153,7 +163,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         {
             var request = default(IRestRequest);
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.DeleteWebHookAsync();
@@ -175,7 +187,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 
             _configuration.SetupGet(c => c.Token).Returns(token);
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.DeleteWebHookAsync();
@@ -194,7 +208,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 
             var url = _fixture.Create<string>();
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.DeleteWebHookAsync();
@@ -202,7 +218,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 
             _mockRepository.VerifyAll();
 
-            var body = request.Parameters.FirstOrDefault(p => p.Type == ParameterType.RequestBody)?.Value.ToString();
+            var body = request.Parameters.FirstOrDefault(p => p.Type == ParameterType.RequestBody)?.Value.Serialize();
 
             Assert.NotNull(body);
             Assert.False(body.Contains(url));
@@ -220,7 +236,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
                                .OmitAutoProperties()
                                .Create();
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(response);
 
 
             var result = await _target.DeleteWebHookAsync();
@@ -234,7 +252,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         [Test]
         public async Task DeleteWebHookAsync_Exception_Success()
         {
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Throws<Exception>();
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Throws<Exception>();
 
 
             var result = await _target.DeleteWebHookAsync();
@@ -254,7 +274,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         {
             var request = default(IRestRequest);
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
             await _target.SendTextMessageAsync(It.IsAny<int>(), It.IsAny<string>());
 
@@ -275,7 +297,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 
             _configuration.SetupGet(c => c.Token).Returns(token);
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.SendTextMessageAsync(It.IsAny<int>(), It.IsAny<string>());
@@ -295,7 +319,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
             var chatId = _fixture.Create<int>();
             var text = _fixture.Create<string>();
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.SendTextMessageAsync(chatId, text);
@@ -303,7 +329,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 
             _mockRepository.VerifyAll();
 
-            var body = request.Parameters.FirstOrDefault(p => p.Type == ParameterType.RequestBody)?.Value.ToString();
+            var body = request.Parameters.FirstOrDefault(p => p.Type == ParameterType.RequestBody)?.Value.Serialize();
 
             Assert.NotNull(body);
             Assert.True(body.Contains(chatId.ToString()));
@@ -326,7 +352,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
                                .OmitAutoProperties()
                                .Create();
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(response);
 
 
             var result = await _target.SendTextMessageAsync(It.IsAny<int>(), It.IsAny<string>());
@@ -346,7 +374,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
                 .OmitAutoProperties()
                 .Create();
 
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(response);
 
 
             var result = await _target.SendTextMessageAsync(It.IsAny<int>(), It.IsAny<string>());
@@ -360,7 +390,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         [Test]
         public async Task SendTextMessageAsync_NullResponse_Success()
         {
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(() => null);
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(() => null);
 
 
             var result = await _target.SendTextMessageAsync(It.IsAny<int>(), It.IsAny<string>());
@@ -374,7 +406,9 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         [Test]
         public async Task SendTextMessageAsync_Exception_Success()
         {
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Throws<Exception>();
+            _webClient.Setup(c =>
+                c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>()))
+                .Throws<Exception>();
 
 
             var result = await _target.SendTextMessageAsync(It.IsAny<int>(), It.IsAny<string>());
