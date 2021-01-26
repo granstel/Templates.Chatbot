@@ -18,12 +18,12 @@ namespace GranSteL.Chatbot.Api.DependencyModules
             
             builder.RegisterType<QnaClient>().As<IQnaClient>();
             
-            builder.Register(RegisterDialogflowClient).As<SessionsClient>();
+            builder.Register(RegisterDialogflowSessionsClient).As<SessionsClient>().SingleInstance();
 
             builder.Register(RegisterRedisClient).As<IDatabase>().SingleInstance();
         }
 
-        private SessionsClient RegisterDialogflowClient(IComponentContext context)
+        private SessionsClient RegisterDialogflowSessionsClient(IComponentContext context)
         {
             var configuration = context.Resolve<DialogflowConfiguration>();
 
