@@ -43,7 +43,7 @@ namespace GranSteL.Chatbot.Services.Clients
 
             try
             {
-                var response = await _webClient.ExecuteTaskAsync(restRequest);
+                var response = await _webClient.ExecuteAsync(restRequest);
 
                 qnaResponse = response?.Content.Deserialize<Response>();
             }

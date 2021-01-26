@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using GranSteL.Chatbot.Services.Clients;
 using GranSteL.Chatbot.Services.Configuration;
@@ -46,7 +47,7 @@ namespace GranSteL.Chatbot.Services.Tests.Clients
 
             _configuration.SetupGet(c => c.Token).Returns(_fixture.Create<string>());
 
-            _webClient.Setup(c => c.ExecuteTaskAsync(It.IsAny<RestRequest>())).Throws<Exception>();
+            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>())).Throws<Exception>();
 
             
             var result = await _target.GetAnswerAsync(knowledgeBase, question);
@@ -83,7 +84,7 @@ namespace GranSteL.Chatbot.Services.Tests.Clients
             _configuration.SetupGet(c => c.Token).Returns(token);
 
             var request = default(IRestRequest);
-            _webClient.Setup(c => c.ExecuteTaskAsync(It.IsAny<IRestRequest>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
 
 
             await _target.GetAnswerAsync(It.IsAny<string>(), It.IsAny<string>());
@@ -101,7 +102,7 @@ namespace GranSteL.Chatbot.Services.Tests.Clients
             var question = _fixture.Create<string>();
 
             var request = default(IRestRequest);
-            _webClient.Setup(c => c.ExecuteTaskAsync(It.IsAny<IRestRequest>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
 
 
             await _target.GetAnswerAsync(It.IsAny<string>(), question);
@@ -125,7 +126,7 @@ namespace GranSteL.Chatbot.Services.Tests.Clients
 
 
             _mockRepository.VerifyAll();
-            _webClient.Verify(c => c.ExecuteTaskAsync(It.IsAny<RestRequest>()));
+            _webClient.Verify(c => c.ExecuteAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()));
         }
     }
 }
