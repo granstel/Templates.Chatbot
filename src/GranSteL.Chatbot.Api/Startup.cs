@@ -25,7 +25,9 @@ namespace GranSteL.Chatbot.Api
         // ReSharper disable once UnusedMember.Global
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services
+                .AddMvc()
+                .AddNewtonsoftJson();
 
             _applicationContainer = DependencyConfiguration.Configure(services, _configuration);
 
@@ -35,21 +37,17 @@ namespace GranSteL.Chatbot.Api
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         // ReSharper disable once UnusedMember.Global
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppConfiguration configuration)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppConfiguration configuration)
         {
+            app.UseMiddleware<ExceptionsMiddleware>();
+
             if (configuration.HttpLog.Enabled)
             {
                 app.UseMiddleware<HttpLogMiddleware>();
             }
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMiddleware<ExceptionsMiddleware>();
-
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(e => e.MapControllers());
         }
     }
 }

@@ -7,7 +7,6 @@ using GranSteL.Chatbot.Api.Exceptions;
 using GranSteL.Chatbot.Services.Configuration;
 using GranSteL.Chatbot.Services.Extensions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using NLog;
 
 namespace GranSteL.Chatbot.Api.Middleware
@@ -95,7 +94,7 @@ namespace GranSteL.Chatbot.Api.Middleware
             {
                 if (request.ContentLength > 0)
                 {
-                    request.EnableRewind();
+                    request.EnableBuffering();
 
                     await AddBodyAsync(builder, request.Body);
                 }
