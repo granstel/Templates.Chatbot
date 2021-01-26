@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GranSteL.Chatbot.Services.Clients;
 using GranSteL.Chatbot.Services.Configuration;
 using AutoFixture;
+using GranSteL.Chatbot.Services.Extensions;
 using GranSteL.Chatbot.Services.Serialization;
 using Moq;
 using NUnit.Framework;
@@ -84,7 +85,7 @@ namespace GranSteL.Chatbot.Services.Tests.Clients
             _configuration.SetupGet(c => c.Token).Returns(token);
 
             var request = default(IRestRequest);
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.GetAnswerAsync(It.IsAny<string>(), It.IsAny<string>());
@@ -102,7 +103,7 @@ namespace GranSteL.Chatbot.Services.Tests.Clients
             var question = _fixture.Create<string>();
 
             var request = default(IRestRequest);
-            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r) => request = r);
+            _webClient.Setup(c => c.ExecuteAsync(It.IsAny<IRestRequest>(), It.IsAny<CancellationToken>())).Callback((IRestRequest r, CancellationToken t) => request = r);
 
 
             await _target.GetAnswerAsync(It.IsAny<string>(), question);
@@ -110,7 +111,7 @@ namespace GranSteL.Chatbot.Services.Tests.Clients
 
             _mockRepository.VerifyAll();
 
-            var body = request.Parameters.FirstOrDefault(p => p.Type == ParameterType.RequestBody)?.Value.ToString();
+            var body = request.Parameters.FirstOrDefault(p => p.Type == ParameterType.RequestBody)?.Value.Serialize();
 
             Assert.NotNull(body);
             Assert.True(body.Contains(question));
