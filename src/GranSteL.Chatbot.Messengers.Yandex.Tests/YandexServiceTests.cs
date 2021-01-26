@@ -6,7 +6,7 @@ using Moq;
 using NUnit.Framework;
 using Yandex.Dialogs.Models;
 using Yandex.Dialogs.Models.Input;
-using Internal = GranSteL.Chatbot.Models.Internal;
+using InternalModels = GranSteL.Chatbot.Models.Internal;
 
 namespace GranSteL.Chatbot.Messengers.Yandex.Tests
 {
@@ -42,22 +42,22 @@ namespace GranSteL.Chatbot.Messengers.Yandex.Tests
                 .OmitAutoProperties()
                 .Create();
 
-            var request = _fixture.Build<Internal.Request>()
+            var request = _fixture.Build<InternalModels.Request>()
                 .OmitAutoProperties()
                 .Create();
 
-            _mapper.Setup(m => m.Map<Internal.Request>(It.IsAny<InputModel>())).Returns(request);
+            _mapper.Setup(m => m.Map<InternalModels.Request>(It.IsAny<InputModel>())).Returns(request);
 
             _conversationService.Setup(s => s.GetResponseAsync(request)).ReturnsAsync(() => null);
 
-            _mapper.Setup(m => m.Map(It.IsAny<Internal.Request>(), It.IsAny<Internal.Response>())).Returns(() => null);
+            _mapper.Setup(m => m.Map(It.IsAny<InternalModels.Request>(), It.IsAny<InternalModels.Response>())).Returns(() => null);
 
             var output = _fixture.Build<OutputModel>()
                 .With(o => o.Session)
                 .OmitAutoProperties()
                 .Create();
 
-            _mapper.Setup(m => m.Map<OutputModel>(It.IsAny<Internal.Response>())).Returns(output);
+            _mapper.Setup(m => m.Map<OutputModel>(It.IsAny<InternalModels.Response>())).Returns(output);
             _mapper.Setup(m => m.Map(It.IsAny<InputModel>(), It.IsAny<OutputModel>())).Returns(() => null);
 
 
