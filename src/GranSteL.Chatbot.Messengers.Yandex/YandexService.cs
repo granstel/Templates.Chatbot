@@ -4,7 +4,7 @@ using AutoMapper;
 using GranSteL.Chatbot.Services;
 using Yandex.Dialogs.Models;
 using Yandex.Dialogs.Models.Input;
-using Internal = GranSteL.Chatbot.Models.Internal;
+using InternalModels = GranSteL.Chatbot.Models.Internal;
 
 namespace GranSteL.Chatbot.Messengers.Yandex
 {
@@ -21,19 +21,19 @@ namespace GranSteL.Chatbot.Messengers.Yandex
             _mapper = mapper;
         }
 
-        protected override Internal.Response ProcessCommand(Internal.Request request)
+        protected override InternalModels.Response ProcessCommand(InternalModels.Request request)
         {
-            Internal.Response response = null;
+            InternalModels.Response response = null;
 
             if (PingCommand.Equals(request.Text, StringComparison.InvariantCultureIgnoreCase))
             {
-                response = new Internal.Response { Text = PongResponse };
+                response = new InternalModels.Response { Text = PongResponse };
             }
 
             return response;
         }
 
-        protected override async Task<OutputModel> AfterAsync(InputModel input, Internal.Response response)
+        protected override async Task<OutputModel> AfterAsync(InputModel input, InternalModels.Response response)
         {
             var output = await base.AfterAsync(input, response);
 
