@@ -16,7 +16,7 @@ namespace GranSteL.Chatbot.Api.DependencyModules
         {
             builder.Register(b => new Mapper(new MapperConfiguration(c =>
             {
-                c.AddProfiles(_names);
+                c.AddMaps(_names);
             }))).As<IMapper>().SingleInstance();
         }
     }

@@ -18,7 +18,7 @@
     <PackageReference Include="NLog" Version="4.7.7" />
     <PackageReference Include="RestSharp" Version="106.11.7" />
     <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
-    <PackageReference Include="AutoMapper" Version="6.2.*" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.0" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.8.0" />
     <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.0" />
