@@ -30,14 +30,16 @@ namespace GranSteL.Chatbot.Messengers.Yandex
                 .ForMember(d => d.Version, m => m.Ignore())
                 .ForMember(d => d.StartAccountLinking, m => m.Ignore())
                 .ForMember(d => d.UserStateUpdate, m => m.Ignore())
-                .ForMember(d => d.SessionState, m => m.Ignore());
+                .ForMember(d => d.SessionState, m => m.Ignore())
+                .ForMember(d => d.ApplicationState, m => m.Ignore());
 
             CreateMap<InternalModels.Response, YandexModels.Response>()
                 .ForMember(d => d.Text, m => m.MapFrom(s => s.Text.Replace(Environment.NewLine, "\n")))
                 .ForMember(d => d.Tts, m => m.MapFrom(s => s.AlternativeText.Replace(Environment.NewLine, "\n")))
                 .ForMember(d => d.EndSession, m => m.MapFrom(s => s.Finished))
                 .ForMember(d => d.Card, m => m.Ignore())
-                .ForMember(d => d.Buttons, m => m.Ignore());
+                .ForMember(d => d.Buttons, m => m.Ignore())
+                .ForMember(d => d.Directives, m => m.Ignore());
 
             CreateMap<InternalModels.Response, Session>()
                 .ForMember(d => d.UserId, m => m.MapFrom(s => s.UserHash))
@@ -52,7 +54,8 @@ namespace GranSteL.Chatbot.Messengers.Yandex
                 .ForMember(d => d.Response, m => m.Ignore())
                 .ForMember(d => d.StartAccountLinking, m => m.Ignore())
                 .ForMember(d => d.UserStateUpdate, m => m.Ignore())
-                .ForMember(d => d.SessionState, m => m.Ignore());
+                .ForMember(d => d.SessionState, m => m.Ignore())
+                .ForMember(d => d.ApplicationState, m => m.Ignore());
         }
     }
 }
