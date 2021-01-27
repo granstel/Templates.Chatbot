@@ -52,9 +52,18 @@ namespace GranSteL.Chatbot.Messengers.Telegram
 
         public override async Task<bool> DeleteWebhookAsync()
         {
-            var result = await _client.DeleteWebhookAsync();
+            try
+            {
+                await _client.DeleteWebhookAsync();
 
-            return result;
+                return true;
+            }
+            catch (Exception e)
+            {
+                _log.Error(e);
+            }
+
+            return false;
         }
 
         protected override async Task<string> AfterAsync(Update input, Response response)
