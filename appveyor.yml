@@ -2,7 +2,7 @@ version: 1.0.0.{build}
 branches:
   only:
   - master
-image: Visual Studio 2017
+image: Visual Studio 2019
 build_script:
 - cmd: dotnet build src\GranSteL.Chatbot.sln -c Release
 test_script:
