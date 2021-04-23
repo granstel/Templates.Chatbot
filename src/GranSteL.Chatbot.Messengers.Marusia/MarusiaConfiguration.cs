@@ -1,6 +1,6 @@
-﻿using FillInTheTextBot.Services.Configuration;
+﻿using GranSteL.Chatbot.Services.Configuration;
 
-namespace FillInTheTextBot.Messengers.Marusia
+namespace GranSteL.Chatbot.Messengers.Marusia
 {
     public class MarusiaConfiguration : MessengerConfiguration
     {

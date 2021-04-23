@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace FillInTheTextBot.Messengers.Marusia
+namespace GranSteL.Chatbot.Messengers.Marusia
 {
     /// <summary>
     /// Probably, registered at DependencyConfiguration of main project
