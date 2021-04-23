@@ -1,6 +1,6 @@
-﻿using GranSteL.Chatbot.Models.Internal;
-using GranSteL.Chatbot.Services.Extensions;
+﻿using GranSteL.Chatbot.Services.Extensions;
 using AutoFixture;
+using GranSteL.Chatbot.Models;
 using Newtonsoft.Json;
 using NUnit.Framework;
 

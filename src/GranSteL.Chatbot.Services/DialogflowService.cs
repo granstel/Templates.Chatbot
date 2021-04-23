@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Google.Cloud.Dialogflow.V2;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services.Configuration;
 using GranSteL.Chatbot.Services.Extensions;
 using NLog;

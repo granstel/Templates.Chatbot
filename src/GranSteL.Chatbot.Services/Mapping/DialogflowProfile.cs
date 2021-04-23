@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Google.Cloud.Dialogflow.V2;
 using Google.Protobuf.WellKnownTypes;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 
 namespace GranSteL.Chatbot.Services.Mapping
 {

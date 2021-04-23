@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 
 namespace GranSteL.Chatbot.Services.Mapping
 {
