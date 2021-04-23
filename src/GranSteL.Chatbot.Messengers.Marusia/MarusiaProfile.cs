@@ -1,11 +1,11 @@
 using System;
 using AutoMapper;
-using FillInTheTextBot.Models;
+using GranSteL.Chatbot.Models;
 using MailRu.Marusia.Models.Buttons;
 using MailRu.Marusia.Models.Input;
 using MarusiaModels = MailRu.Marusia.Models;
 
-namespace FillInTheTextBot.Messengers.Marusia
+namespace GranSteL.Chatbot.Messengers.Marusia
 {
     /// <summary>
     /// Probably, registered at MappingModule of "Services" project
@@ -15,20 +15,13 @@ namespace FillInTheTextBot.Messengers.Marusia
         public MarusiaProfile()
         {
             CreateMap<InputModel, Request>()
-                .ForMember(d => d.ChatHash, m => m.ResolveUsing(s => s.Session?.SkillId))
-                .ForMember(d => d.UserHash, m => m.ResolveUsing(s => s.Session?.UserId))
-                .ForMember(d => d.Text, m => m.ResolveUsing(s => s.Request?.OriginalUtterance))
-                .ForMember(d => d.SessionId, m => m.ResolveUsing(s => s.Session?.SessionId))
-                .ForMember(d => d.NewSession, m => m.ResolveUsing(s => s.Session?.New))
-                .ForMember(d => d.Language, m => m.ResolveUsing(s => s.Meta?.Locale))
-                .ForMember(d => d.HasScreen, m => m.ResolveUsing(s => string.Equals(s?.Session?.Application?.ApplicationType, MarusiaModels.ApplicationTypes.Mobile)))
-                .ForMember(d => d.ClientId, m => m.ResolveUsing(s => s?.Meta?.ClientId))
-                .ForMember(d => d.Source, m => m.UseValue(Source.Marusia))
-                .ForMember(d => d.Appeal, m => m.UseValue(Appeal.NoOfficial))
-                .ForMember(d => d.RequiredContexts, m => m.Ignore())
-                .ForMember(d => d.IsOldUser, m => m.Ignore())
-                .ForMember(d => d.NextTextIndex, m => m.Ignore())
-                .ForMember(d => d.ScopeKey, m => m.Ignore());
+                .ForMember(d => d.ChatHash, m => m.MapFrom((s, d) => s.Session?.SkillId))
+                .ForMember(d => d.UserHash, m => m.MapFrom((s, d) => s.Session?.UserId))
+                .ForMember(d => d.Text, m => m.MapFrom((s, d) => s.Request?.OriginalUtterance))
+                .ForMember(d => d.SessionId, m => m.MapFrom((s, d) => s.Session?.SessionId))
+                .ForMember(d => d.NewSession, m => m.MapFrom((s, d) => s.Session?.New))
+                .ForMember(d => d.Language, m => m.MapFrom((s, d) => s.Meta?.Locale))
+                .ForMember(d => d.Source, m => m.MapFrom(s => Source.Marusia));
 
             CreateMap<Response, MarusiaModels.OutputModel>()
                 .ForMember(d => d.Response, m => m.MapFrom(s => s))
