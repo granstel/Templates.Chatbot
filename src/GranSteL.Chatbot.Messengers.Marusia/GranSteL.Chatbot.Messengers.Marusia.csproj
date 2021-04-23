@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FillInTheTextBot.Messengers\FillInTheTextBot.Messengers.csproj" />
+    <ProjectReference Include="..\GranSteL.Chatbot.Messengers\GranSteL.Chatbot.Messengers.csproj" />
   </ItemGroup>
 
 </Project>

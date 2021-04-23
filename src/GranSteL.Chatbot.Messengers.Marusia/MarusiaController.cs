@@ -3,7 +3,7 @@ using MailRu.Marusia.Models.Input;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace FillInTheTextBot.Messengers.Marusia
+namespace GranSteL.Chatbot.Messengers.Marusia
 {
     [Produces("application/json")]
     public class MarusiaController : MessengerController<InputModel, OutputModel>
