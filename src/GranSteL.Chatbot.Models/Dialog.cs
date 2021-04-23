@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GranSteL.Chatbot.Models.Internal
+namespace GranSteL.Chatbot.Models
 {
     public class Dialog
     {

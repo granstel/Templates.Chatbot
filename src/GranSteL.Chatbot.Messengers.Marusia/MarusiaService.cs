@@ -1,13 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using FillInTheTextBot.Services;
-using FillInTheTextBot.Services.Extensions;
-using GranSteL.Helpers.Redis;
+using GranSteL.Chatbot.Services;
 using MailRu.Marusia.Models;
 using MailRu.Marusia.Models.Input;
 
-namespace FillInTheTextBot.Messengers.Marusia
+namespace GranSteL.Chatbot.Messengers.Marusia
 {
     public class MarusiaService : MessengerService<InputModel, OutputModel>, IMarusiaService
     {
@@ -15,9 +12,7 @@ namespace FillInTheTextBot.Messengers.Marusia
 
         public MarusiaService(
             IConversationService conversationService,
-            IMapper mapper,
-            IDialogflowService dialogflowService,
-            IRedisCacheService cache) : base(conversationService, mapper, dialogflowService)
+            IMapper mapper) : base(conversationService, mapper)
         {
             _mapper = mapper;
         }

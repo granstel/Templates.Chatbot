@@ -1,4 +1,4 @@
-namespace GranSteL.Chatbot.Models.Internal
+namespace GranSteL.Chatbot.Models
 {
     public class Request
     {

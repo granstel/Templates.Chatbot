@@ -1,4 +1,4 @@
-namespace GranSteL.Chatbot.Models.Internal
+namespace GranSteL.Chatbot.Models
 {
     /// <summary>
     /// Источник запроса, мессенджер
@@ -7,6 +7,7 @@ namespace GranSteL.Chatbot.Models.Internal
     {
         Chat2Desk,
         Telegram,
-        Yandex
+        Yandex,
+        Marusia
     }
 }
