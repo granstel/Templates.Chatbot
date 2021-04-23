@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services;
 
 namespace GranSteL.Chatbot.Messengers
