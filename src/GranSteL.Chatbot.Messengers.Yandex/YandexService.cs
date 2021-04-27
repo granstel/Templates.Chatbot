@@ -15,7 +15,6 @@ namespace GranSteL.Chatbot.Messengers.Yandex
 
         private readonly IMapper _mapper;
 
-
         public YandexService(IConversationService conversationService, IMapper mapper) : base(conversationService, mapper)
         {
             _mapper = mapper;

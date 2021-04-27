@@ -6,7 +6,6 @@ namespace GranSteL.Chatbot.Models
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Appeal
     {
-        Default,
         NoOfficial,
         Official,
     }

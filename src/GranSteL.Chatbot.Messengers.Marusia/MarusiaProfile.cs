@@ -21,7 +21,9 @@ namespace GranSteL.Chatbot.Messengers.Marusia
                 .ForMember(d => d.SessionId, m => m.MapFrom((s, d) => s.Session?.SessionId))
                 .ForMember(d => d.NewSession, m => m.MapFrom((s, d) => s.Session?.New))
                 .ForMember(d => d.Language, m => m.MapFrom((s, d) => s.Meta?.Locale))
-                .ForMember(d => d.Source, m => m.MapFrom(s => Source.Marusia));
+                .ForMember(d => d.HasScreen, m => m.MapFrom((s, d) => string.Equals(s?.Session?.Application?.ApplicationType, MarusiaModels.ApplicationTypes.Mobile)))
+                .ForMember(d => d.Source, m => m.MapFrom(s => Source.Marusia))
+                .ForMember(d => d.Appeal, m => m.MapFrom(s => Appeal.NoOfficial));
 
             CreateMap<Response, MarusiaModels.OutputModel>()
                 .ForMember(d => d.Response, m => m.MapFrom(s => s))

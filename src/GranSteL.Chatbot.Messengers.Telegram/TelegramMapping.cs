@@ -14,6 +14,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram
             .ForMember(d => d.SessionId, m => m.MapFrom((s, d) => (s.Message?.From?.Id).GetValueOrDefault()))
             .ForMember(d => d.Text, m => m.MapFrom((s, d) => s.Message?.Text))
             .ForMember(d => d.Source, m => m.MapFrom(s => Source.Telegram))
+            .ForMember(d => d.Appeal, m => m.MapFrom(s => Appeal.NoOfficial))
             .ForMember(d => d.Language, m => m.Ignore())
             .ForMember(d => d.NewSession, m => m.Ignore());
         }
