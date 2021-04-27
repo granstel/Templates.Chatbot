@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GranSteL.Chatbot.Messengers\GranSteL.Chatbot.Messengers.csproj" />
-    <ProjectReference Include="..\GranSteL.Chatbot.Models\GranSteL.Chatbot.Models.csproj" />
-    <ProjectReference Include="..\GranSteL.Chatbot.Services\GranSteL.Chatbot.Services.csproj" />
+    <ProjectReference Include="..\GranSteL.Chatbot.Messengers.Marusia\GranSteL.Chatbot.Messengers.Marusia.csproj" />
   </ItemGroup>
 
 </Project>
