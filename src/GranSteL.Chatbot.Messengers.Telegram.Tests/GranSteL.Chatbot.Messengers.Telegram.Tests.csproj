@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.15.0" />
+    <PackageReference Include="nunit" Version="3.13.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="Moq" Version="4.16.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GranSteL.Chatbot.Messengers.Telegram\GranSteL.Chatbot.Messengers.Telegram.csproj" />
     <ProjectReference Include="..\GranSteL.Chatbot.Messengers.Tests\GranSteL.Chatbot.Messengers.Tests.csproj" />
   </ItemGroup>

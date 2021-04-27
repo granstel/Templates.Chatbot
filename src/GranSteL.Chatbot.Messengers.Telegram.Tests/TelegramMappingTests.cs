@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using AutoMapper;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 using NUnit.Framework;
 using Telegram.Bot.Types;
 

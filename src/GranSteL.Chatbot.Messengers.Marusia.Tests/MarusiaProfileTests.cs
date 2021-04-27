@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace GranSteL.Chatbot.Messengers.Marusia.Tests
 {
     [TestFixture]
-    public class YandexProfileTests
+    public class MarusiaProfileTests
     {
         private IMapper _target;
 

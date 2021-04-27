@@ -4,20 +4,21 @@ using AutoMapper;
 using GranSteL.Chatbot.Services;
 using Moq;
 using NUnit.Framework;
-using Request = GranSteL.Chatbot.Models.Request;
-using Response = GranSteL.Chatbot.Models.Response;
+using MailRu.Marusia.Models;
+using MailRu.Marusia.Models.Input;
+using InternalModels = GranSteL.Chatbot.Models;
 
 namespace GranSteL.Chatbot.Messengers.Marusia.Tests
 {
     [TestFixture]
-    public class YandexServiceTests
+    public class MarusiaServiceTests
     {
         private MockRepository _mockRepository;
 
         private Mock<IConversationService> _conversationService;
         private Mock<IMapper> _mapper;
 
-        private YandexService _target;
+        private MarusiaService _target;
 
         private Fixture _fixture;
 
@@ -29,7 +30,7 @@ namespace GranSteL.Chatbot.Messengers.Marusia.Tests
             _conversationService = _mockRepository.Create<IConversationService>();
             _mapper = _mockRepository.Create<IMapper>();
 
-            _target = new YandexService(_conversationService.Object, _mapper.Object);
+            _target = new MarusiaService(_conversationService.Object, _mapper.Object);
 
             _fixture = new Fixture();
         }
@@ -41,22 +42,22 @@ namespace GranSteL.Chatbot.Messengers.Marusia.Tests
                 .OmitAutoProperties()
                 .Create();
 
-            var request = _fixture.Build<Request>()
+            var request = _fixture.Build<InternalModels.Request>()
                 .OmitAutoProperties()
                 .Create();
 
-            _mapper.Setup(m => m.Map<Request>(It.IsAny<InputModel>())).Returns(request);
+            _mapper.Setup(m => m.Map<InternalModels.Request>(It.IsAny<InputModel>())).Returns(request);
 
             _conversationService.Setup(s => s.GetResponseAsync(request)).ReturnsAsync(() => null);
 
-            _mapper.Setup(m => m.Map(It.IsAny<Request>(), It.IsAny<Response>())).Returns(() => null);
+            _mapper.Setup(m => m.Map(It.IsAny<InternalModels.Request>(), It.IsAny<InternalModels.Response>())).Returns(() => null);
 
             var output = _fixture.Build<OutputModel>()
                 .With(o => o.Session)
                 .OmitAutoProperties()
                 .Create();
 
-            _mapper.Setup(m => m.Map<OutputModel>(It.IsAny<Response>())).Returns(output);
+            _mapper.Setup(m => m.Map<OutputModel>(It.IsAny<InternalModels.Response>())).Returns(output);
             _mapper.Setup(m => m.Map(It.IsAny<InputModel>(), It.IsAny<OutputModel>())).Returns(() => null);
 
 

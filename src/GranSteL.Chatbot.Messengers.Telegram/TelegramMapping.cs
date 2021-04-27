@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 using Telegram.Bot.Types;
 
 namespace GranSteL.Chatbot.Messengers.Telegram

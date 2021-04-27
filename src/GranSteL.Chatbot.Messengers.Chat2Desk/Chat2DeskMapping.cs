@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 
 namespace GranSteL.Chatbot.Messengers.Chat2Desk
 {
