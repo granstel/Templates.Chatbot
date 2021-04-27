@@ -19,7 +19,7 @@ namespace GranSteL.Chatbot.Messengers.Sber
             builder.RegisterType<SberController>().AsSelf();
 
             builder.RegisterType<SberService>().As<ISberService>();
-            builder.RegisterType<SberProfile>().AsSelf();
+            builder.RegisterType<SberMapping>().AsSelf();
         }
     }
 }

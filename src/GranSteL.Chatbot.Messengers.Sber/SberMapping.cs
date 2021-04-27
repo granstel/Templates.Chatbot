@@ -13,11 +13,11 @@ namespace GranSteL.Chatbot.Messengers.Sber
     /// <summary>
     /// Probably, registered at MappingModule of "Services" project
     /// </summary>
-    public class SberProfile : Profile
+    public class SberMapping : Profile
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        public SberProfile()
+        public SberMapping()
         {
             CreateMap<Request, InternalModels.Request>()
                 .ForMember(d => d.ChatHash, m => m.MapFrom((s, d) => s?.Payload?.AppInfo?.ProjectId.ToString()))

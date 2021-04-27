@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 namespace GranSteL.Chatbot.Messengers.Telegram.Tests
 {
     [TestFixture]
-    public class TelegramProfileTests
+    public class TelegramMappingTests
     {
         private IMapper _target;
 

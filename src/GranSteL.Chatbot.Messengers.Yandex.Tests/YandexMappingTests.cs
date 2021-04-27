@@ -10,7 +10,7 @@ using Yandex.Dialogs.Models.Input;
 namespace GranSteL.Chatbot.Messengers.Yandex.Tests
 {
     [TestFixture]
-    public class YandexProfileTests
+    public class YandexMappingTests
     {
         private IMapper _target;
 
@@ -19,7 +19,7 @@ namespace GranSteL.Chatbot.Messengers.Yandex.Tests
         [SetUp]
         public void InitTest()
         {
-            _target = new Mapper(new MapperConfiguration(c => c.AddProfile<YandexProfile>()));
+            _target = new Mapper(new MapperConfiguration(c => c.AddProfile<YandexMapping>()));
 
             _fixture = new Fixture();
             _fixture.Customizations.Add(new TypeRelay(typeof(Button), typeof(ResponseButton)));

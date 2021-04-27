@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace GranSteL.Chatbot.Messengers.Marusia.Tests
 {
     [TestFixture]
-    public class MarusiaProfileTests
+    public class MarusiaMappingTests
     {
         private IMapper _target;
 
@@ -19,7 +19,7 @@ namespace GranSteL.Chatbot.Messengers.Marusia.Tests
         [SetUp]
         public void InitTest()
         {
-            _target = new Mapper(new MapperConfiguration(c => c.AddProfile<MarusiaProfile>()));
+            _target = new Mapper(new MapperConfiguration(c => c.AddProfile<MarusiaMapping>()));
 
             _fixture = new Fixture();
             _fixture.Customizations.Add(new TypeRelay(typeof(Button), typeof(ResponseButton)));

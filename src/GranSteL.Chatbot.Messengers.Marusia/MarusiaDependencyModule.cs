@@ -19,7 +19,7 @@ namespace GranSteL.Chatbot.Messengers.Marusia
             builder.RegisterType<MarusiaController>().AsSelf();
 
             builder.RegisterType<MarusiaService>().As<IMarusiaService>();
-            builder.RegisterType<MarusiaProfile>().AsSelf();
+            builder.RegisterType<MarusiaMapping>().AsSelf();
         }
     }
 }
