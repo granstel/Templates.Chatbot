@@ -15,5 +15,9 @@ namespace GranSteL.Chatbot.Models
         public string SessionId { get; set; }
 
         public bool? NewSession { get; set; }
+
+        public bool HasScreen { get; set; }
+
+        public Appeal Appeal { get; set; }
     }
 }

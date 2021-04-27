@@ -8,6 +8,7 @@ namespace GranSteL.Chatbot.Models
         Chat2Desk,
         Telegram,
         Yandex,
-        Marusia
+        Marusia,
+        Sber
     }
 }
