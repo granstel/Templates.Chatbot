@@ -23,7 +23,8 @@ namespace GranSteL.Chatbot.Messengers.Yandex
                 .ForMember(d => d.NewSession, m => m.MapFrom((s, d) => s.Session?.New))
                 .ForMember(d => d.Language, m => m.MapFrom((s, d) => s.Meta?.Locale))
                 .ForMember(d => d.Source, m => m.MapFrom(s => Source.Yandex))
-                .ForMember(d => d.Appeal, m => m.MapFrom(s => Appeal.NoOfficial));
+                .ForMember(d => d.Appeal, m => m.MapFrom(s => Appeal.NoOfficial))
+                .ForMember(d => d.HasScreen, m => m.MapFrom((s, d) => s?.Meta?.Interfaces?.Screen != null));
 
             CreateMap<InternalModels.Response, OutputModel>()
                 .ForMember(d => d.Response, m => m.MapFrom(s => s))
