@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Mapping\Rules\**" />
-    <EmbeddedResource Remove="Mapping\Rules\**" />
-    <None Remove="Mapping\Rules\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Autofac" Version="6.*" />
     <PackageReference Include="Google.Cloud.Dialogflow.V2" Version="3.*" />
     <PackageReference Include="GranSteL.Helpers.Redis" Version="1.*" />

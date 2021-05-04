@@ -33,7 +33,8 @@ namespace GranSteL.Chatbot.Messengers.Yandex
                 .ForMember(d => d.StartAccountLinking, m => m.Ignore())
                 .ForMember(d => d.UserStateUpdate, m => m.Ignore())
                 .ForMember(d => d.SessionState, m => m.Ignore())
-                .ForMember(d => d.ApplicationState, m => m.Ignore());
+                .ForMember(d => d.ApplicationState, m => m.Ignore())
+                .ForMember(d => d.Analytics, m => m.Ignore());
 
             CreateMap<InternalModels.Response, YandexModels.Response>()
                 .ForMember(d => d.Text, m => m.MapFrom(s => s.Text.Replace(Environment.NewLine, "\n")))
@@ -57,7 +58,8 @@ namespace GranSteL.Chatbot.Messengers.Yandex
                 .ForMember(d => d.StartAccountLinking, m => m.Ignore())
                 .ForMember(d => d.UserStateUpdate, m => m.Ignore())
                 .ForMember(d => d.SessionState, m => m.Ignore())
-                .ForMember(d => d.ApplicationState, m => m.Ignore());
+                .ForMember(d => d.ApplicationState, m => m.Ignore())
+                .ForMember(d => d.Analytics, m => m.Ignore());
         }
     }
 }
