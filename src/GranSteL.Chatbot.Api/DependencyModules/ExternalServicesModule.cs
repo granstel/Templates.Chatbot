@@ -1,8 +1,6 @@
 ﻿using Autofac;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Dialogflow.V2;
-using GranSteL.Chatbot.Services;
-using GranSteL.Chatbot.Services.Clients;
 using GranSteL.Chatbot.Services.Configuration;
 using GranSteL.Helpers.Redis;
 using Grpc.Auth;
@@ -16,9 +14,7 @@ namespace GranSteL.Chatbot.Api.DependencyModules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<RestClient>().As<IRestClient>();
-            
-            builder.RegisterType<QnaClient>().As<IQnaClient>();
-            
+
             builder.Register(RegisterDialogflowSessionsClient).As<SessionsClient>().SingleInstance();
 
             builder.Register(RegisterRedisClient).As<IDatabase>().SingleInstance();
