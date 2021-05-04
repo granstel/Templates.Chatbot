@@ -5,11 +5,11 @@ using Google.Cloud.Dialogflow.V2;
 using Google.Protobuf.WellKnownTypes;
 using GranSteL.Chatbot.Models;
 
-namespace GranSteL.Chatbot.Services.Mapping
+namespace GranSteL.Chatbot.Services.Mappings
 {
-    public class DialogflowProfile : Profile
+    public class DialogflowMapping : Profile
     {
-        public DialogflowProfile()
+        public DialogflowMapping()
         {
             CreateMap<QueryResult, Dialog>()
                 .ForMember(d => d.Parameters, m => m.MapFrom(s => GetParameters(s)))

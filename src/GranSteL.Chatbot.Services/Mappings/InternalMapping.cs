@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using GranSteL.Chatbot.Models;
 
-namespace GranSteL.Chatbot.Services.Mapping
+namespace GranSteL.Chatbot.Services.Mappings
 {
-    public class InternalProfile : Profile
+    public class InternalMapping : Profile
     {
-        public InternalProfile()
+        public InternalMapping()
         {
             CreateMap<Request, Response>()
                 .ForMember(d => d.ChatHash, m => m.MapFrom(s => s.ChatHash))
