@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Google.Cloud.Dialogflow.V2;
@@ -14,14 +15,21 @@ namespace GranSteL.Chatbot.Services.Mappings
             CreateMap<QueryResult, Dialog>()
                 .ForMember(d => d.Parameters, m => m.MapFrom(s => GetParameters(s)))
                 .ForMember(d => d.Response, m => m.MapFrom(s => s.FulfillmentText))
-                .ForMember(d => d.ParametersIncomplete, m => m.MapFrom(s => !s.AllRequiredParamsPresent))
+                .ForMember(d => d.AllRequiredParamsPresent, m => m.MapFrom(s => s.AllRequiredParamsPresent))
                 .ForMember(d => d.Action, m => m.MapFrom(s => s.Action))
-                .ForMember(d => d.EndConversation, m => m.Ignore())
-                .AfterMap((s, d) =>
+                .ForMember(d => d.Buttons, m => m.MapFrom(s => GetButtons(s)))
+                .ForMember(d => d.EndConversation, m => m.MapFrom((s, d) =>
                 {
-                    d.EndConversation = s.DiagnosticInfo?.Fields?.Where(f => string.Equals(f.Key, "end_conversation"))
-                                            .Select(f => f.Value.BoolValue).FirstOrDefault() ?? false;
-                });
+                    const string endConversationKey = "end_conversation";
+
+                    var endConversationAtDiagnosticInfo = s.DiagnosticInfo?.Fields?
+                        .Where(f => string.Equals(f.Key, endConversationKey, StringComparison.InvariantCultureIgnoreCase))
+                        .Select(f => f.Value.BoolValue).FirstOrDefault();
+
+                    var endConversationAtAction = !string.IsNullOrEmpty(s.Action) && string.Equals(s.Action, endConversationKey, StringComparison.InvariantCultureIgnoreCase);
+
+                    return endConversationAtDiagnosticInfo ?? endConversationAtAction;
+                }));
         }
 
         private IDictionary<string, string> GetParameters(QueryResult queryResult)
@@ -60,6 +68,29 @@ namespace GranSteL.Chatbot.Services.Mappings
             }
 
             return dictionary;
+        }
+
+        private Button[] GetButtons(QueryResult s)
+        {
+            var quickReplies = s?.FulfillmentMessages
+                ?.Where(m => m.MessageCase == Intent.Types.Message.MessageOneofCase.QuickReplies)
+                .SelectMany(m => m.QuickReplies.QuickReplies_.Select(r => new Button
+                {
+                    Text = r,
+                    IsQuickReply = true
+                })).Where(r => r != null).ToList();
+
+            var cards = s?.FulfillmentMessages
+                ?.Where(m => m.MessageCase == Intent.Types.Message.MessageOneofCase.Card)
+                .SelectMany(m => m.Card.Buttons.Select(b => new Button
+                {
+                    Text = b.Text,
+                    Url = b.Postback
+                })).Where(b => b != null).ToList();
+
+            quickReplies.AddRange(cards);
+
+            return quickReplies.ToArray();
         }
     }
 }
