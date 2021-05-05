@@ -1,17 +1,23 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services;
+using NLog;
 
 namespace GranSteL.Chatbot.Messengers
 {
     public abstract class MessengerService<TInput, TOutput> : IMessengerService<TInput, TOutput>
     {
+        protected readonly Logger Log;
+
         private readonly IConversationService _conversationService;
         private readonly IMapper _mapper;
 
         protected MessengerService(IConversationService conversationService, IMapper mapper)
         {
+            Log = LogManager.GetLogger(GetType().Name);
+
             _conversationService = conversationService;
             _mapper = mapper;
         }
@@ -25,17 +31,30 @@ namespace GranSteL.Chatbot.Messengers
 
         public virtual async Task<TOutput> ProcessIncomingAsync(TInput input)
         {
-            var request = Before(input);
+            Response response;
 
-            var response = ProcessCommand(request);
-
-            // ReSharper disable once ConvertIfStatementToNullCoalescingExpression
-            if (response == null)
+            try
             {
-                response = await _conversationService.GetResponseAsync(request);
-            }
+                var request = Before(input);
 
-            _mapper.Map(request, response);
+                response = ProcessCommand(request);
+
+                if (response == null)
+                {
+                    response = await _conversationService.GetResponseAsync(request);
+                }
+
+                _mapper.Map(request, response);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+
+                response = new Response
+                {
+                    Text = "Прости, у меня какие-то проблемы... Давай попробуем ещё раз"
+                };
+            }
 
             var output = await AfterAsync(input, response);
 
@@ -49,8 +68,6 @@ namespace GranSteL.Chatbot.Messengers
 
         protected virtual async Task<TOutput> AfterAsync(TInput input, Response response)
         {
-            //TODO: проверить, какой тип будет фигурировать в сообщении
-            //throw new NotImplementedException($"{nameof(AfterAsync)} doesn't implemented for {GetType().Name}");
             return await Task.Run(() =>
             {
                 var output = _mapper.Map<TOutput>(response);
