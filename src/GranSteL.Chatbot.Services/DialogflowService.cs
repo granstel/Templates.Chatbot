@@ -100,7 +100,7 @@ namespace GranSteL.Chatbot.Services
             return intentRequest;
         }
 
-        public EventInput ResolveEvent(Request request)
+        private EventInput ResolveEvent(Request request)
         {
             var result = default(EventInput);
 
@@ -148,7 +148,6 @@ namespace GranSteL.Chatbot.Services
         {
             EventInput result;
 
-            // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
             if (request.NewSession == true && string.IsNullOrEmpty(request.Text))
             {
                 result = GetEvent(WelcomeEventName);
