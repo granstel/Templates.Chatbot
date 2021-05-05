@@ -12,7 +12,7 @@ namespace GranSteL.Chatbot.Services.Extensions
         {
             if (!(obj is string result))
             {
-                result = JsonConvert.SerializeObject(obj, settings);
+                result = JsonConvert.SerializeObject(obj, null, settings);
             }
 
             return result;
@@ -32,7 +32,7 @@ namespace GranSteL.Chatbot.Services.Extensions
                 Log.Warn(e);
             }
 
-            return default(T);
+            return default;
         }
     }
 }

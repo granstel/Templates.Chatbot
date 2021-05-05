@@ -59,7 +59,7 @@ namespace GranSteL.Chatbot.Messengers
 
             var response = await _messengerService.ProcessIncomingAsync(input);
 
-            return Json(response);
+            return Json(response, SerializerSettings);
         }
 
         [HttpPut("{token?}")]
@@ -94,7 +94,7 @@ namespace GranSteL.Chatbot.Messengers
                 return string.Equals(_configuration.IncomingToken, token, StringComparison.InvariantCultureIgnoreCase);
             }
 
-            return true;
+            return false;
         }
     }
 }
