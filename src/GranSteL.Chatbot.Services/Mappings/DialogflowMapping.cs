@@ -67,25 +67,38 @@ namespace GranSteL.Chatbot.Services.Mappings
 
         private Button[] GetButtons(QueryResult s)
         {
+            var buttons = new List<Button>();
+
             var quickReplies = s?.FulfillmentMessages
-                ?.Where(m => m.MessageCase == Intent.Types.Message.MessageOneofCase.QuickReplies)
+                ?.Where(IsQuickReplies)
                 .SelectMany(m => m.QuickReplies.QuickReplies_.Select(r => new Button
                 {
                     Text = r,
                     IsQuickReply = true
-                })).Where(r => r != null).ToList();
+                })).Where(r => r != null).ToList() ?? buttons;
 
             var cards = s?.FulfillmentMessages
-                ?.Where(m => m.MessageCase == Intent.Types.Message.MessageOneofCase.Card)
+                ?.Where(IsCard)
                 .SelectMany(m => m.Card.Buttons.Select(b => new Button
                 {
                     Text = b.Text,
                     Url = b.Postback
-                })).Where(b => b != null).ToList();
+                })).Where(b => b != null).ToList() ?? buttons;
 
-            quickReplies.AddRange(cards);
+            buttons.AddRange(quickReplies);
+            buttons.AddRange(cards);
 
             return quickReplies.ToArray();
+        }
+
+        private bool IsQuickReplies(Intent.Types.Message message)
+        {
+            return message.MessageCase == Intent.Types.Message.MessageOneofCase.QuickReplies;
+        }
+
+        private bool IsCard(Intent.Types.Message message)
+        {
+            return message.MessageCase == Intent.Types.Message.MessageOneofCase.Card;
         }
 
         private Payload GetPayload(QueryResult queryResult)
