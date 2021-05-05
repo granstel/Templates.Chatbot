@@ -5,6 +5,7 @@ using AutoMapper;
 using Google.Cloud.Dialogflow.V2;
 using Google.Protobuf.WellKnownTypes;
 using GranSteL.Chatbot.Models;
+using GranSteL.Chatbot.Services.Extensions;
 
 namespace GranSteL.Chatbot.Services.Mappings
 {
@@ -18,6 +19,7 @@ namespace GranSteL.Chatbot.Services.Mappings
                 .ForMember(d => d.AllRequiredParamsPresent, m => m.MapFrom(s => s.AllRequiredParamsPresent))
                 .ForMember(d => d.Action, m => m.MapFrom(s => s.Action))
                 .ForMember(d => d.Buttons, m => m.MapFrom(s => GetButtons(s)))
+                .ForMember(d => d.Payload, m => m.MapFrom(s => GetPayload(s)))
                 .ForMember(d => d.EndConversation, m => m.MapFrom((s, d) =>
                 {
                     const string endConversationKey = "end_conversation";
@@ -91,6 +93,15 @@ namespace GranSteL.Chatbot.Services.Mappings
             quickReplies.AddRange(cards);
 
             return quickReplies.ToArray();
+        }
+
+        private Payload GetPayload(QueryResult queryResult)
+        {
+            var payload = queryResult?.FulfillmentMessages?
+                .Where(m => m.MessageCase == Intent.Types.Message.MessageOneofCase.Payload)
+                .Select(m => m.Payload.ToString().Deserialize<Payload>()).FirstOrDefault();
+
+            return payload;
         }
     }
 }
