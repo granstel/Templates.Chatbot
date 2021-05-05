@@ -14,10 +14,10 @@ namespace GranSteL.Chatbot.Services.Mappings
         public DialogflowMapping()
         {
             CreateMap<QueryResult, Dialog>()
-                .ForMember(d => d.Parameters, m => m.MapFrom(s => GetParameters(s)))
                 .ForMember(d => d.Response, m => m.MapFrom(s => s.FulfillmentText))
                 .ForMember(d => d.AllRequiredParamsPresent, m => m.MapFrom(s => s.AllRequiredParamsPresent))
                 .ForMember(d => d.Action, m => m.MapFrom(s => s.Action))
+                .ForMember(d => d.Parameters, m => m.MapFrom(s => GetParameters(s)))
                 .ForMember(d => d.Buttons, m => m.MapFrom(s => GetButtons(s)))
                 .ForMember(d => d.Payload, m => m.MapFrom(s => GetPayload(s)))
                 .ForMember(d => d.EndConversation, m => m.MapFrom((s, d) =>
@@ -34,11 +34,11 @@ namespace GranSteL.Chatbot.Services.Mappings
                 }));
         }
 
-        private IDictionary<string, string> GetParameters(QueryResult queryResult)
+        private IDictionary<string, ICollection<string>> GetParameters(QueryResult queryResult)
         {
-            var dictionary = new Dictionary<string, string>();
+            var dictionary = new Dictionary<string, ICollection<string>>();
 
-            var fields = queryResult?.Parameters.Fields;
+            var fields = queryResult?.Parameters?.Fields;
 
             if (fields?.Any() != true)
             {
@@ -49,23 +49,16 @@ namespace GranSteL.Chatbot.Services.Mappings
             {
                 if (field.Value.KindCase == Value.KindOneofCase.StringValue)
                 {
-                    dictionary.Add(field.Key, field.Value.StringValue);
+                    dictionary.Add(field.Key, new[] { field.Value.StringValue });
                 }
                 else if (field.Value.KindCase == Value.KindOneofCase.StructValue)
                 {
-                    var stringValues = new List<string>();
+                    var stringValues = fields
+                        .Where(valueField => valueField.Value.KindCase == Value.KindOneofCase.StringValue)
+                        .Select(valueField => valueField.Value.StringValue)
+                        .Where(value => !string.IsNullOrEmpty(value)).ToList();
 
-                    foreach (var valueField in field.Value.StructValue.Fields)
-                    {
-                        if (valueField.Value.KindCase == Value.KindOneofCase.StringValue)
-                        {
-                            stringValues.Add(valueField.Value.StringValue);
-                        }
-                    }
-
-                    var stringValue = string.Join("/", stringValues);
-
-                    dictionary.Add(field.Key, stringValue);
+                    dictionary.Add(field.Key, stringValues);
                 }
             }
 

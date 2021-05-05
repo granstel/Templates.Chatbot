@@ -7,10 +7,10 @@ namespace GranSteL.Chatbot.Models
     {
         public Dialog()
         {
-            Parameters = new Dictionary<string, string>();
+            Parameters = new Dictionary<string, ICollection<string>>();
         }
 
-        public IDictionary<string, string> Parameters { get; set; }
+        public IDictionary<string, ICollection<string>> Parameters { get; set; }
 
         public bool EndConversation { get; set; }
 
@@ -26,7 +26,9 @@ namespace GranSteL.Chatbot.Models
 
         public IEnumerable<string> GetParameters(string key)
         {
-            return Parameters?.Where(p => string.Equals(p.Key, key)).Select(p => p.Value);
+            return Parameters?
+                .Where(p => string.Equals(p.Key, key) && p.Value != null)
+                .SelectMany(p => p.Value);
         }
     }
 }
