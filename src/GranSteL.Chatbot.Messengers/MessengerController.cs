@@ -82,19 +82,18 @@ namespace GranSteL.Chatbot.Messengers
 
         protected virtual bool IsValidRequest(ActionExecutingContext context)
         {
-            if (string.IsNullOrEmpty(_configuration.IncomingToken))
+            var actionHasTokenParameter = context.ActionDescriptor.Parameters.Any(p => string.Equals(p.Name, TokenParameter));
+
+            if (string.IsNullOrEmpty(_configuration.IncomingToken) || !actionHasTokenParameter)
             {
                 return true;
             }
 
-            if (context.ActionArguments.TryGetValue(TokenParameter, out object value))
-            {
-                var token = value as string;
+            context.ActionArguments.TryGetValue(TokenParameter, out object value);
 
-                return string.Equals(_configuration.IncomingToken, token, StringComparison.InvariantCultureIgnoreCase);
-            }
+            var token = value as string;
 
-            return false;
+            return string.Equals(_configuration.IncomingToken, token, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }
