@@ -20,7 +20,7 @@
 		</packageTypes>
 	</metadata>
 	<files>
-		<file src=".\src\**\*.*" target="content" exclude="**\bin\**\*.*;**\obj\**\*.*;**\.vs\**\*.*" />
+		<file src=".\src\**\*.*" target="content" exclude="**\bin\**\*.*;**\obj\**\*.*;**\.vs\**\*.*;**\.idea\**\*.*;**\*DotSettings" />
 		<file src=".\LICENSE" />
 	</files>
 </package>
