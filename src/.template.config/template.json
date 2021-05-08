@@ -27,9 +27,19 @@
         "datatype": "bool",
         "defaultValue": "false"
     },
+	"marusia": {
+        "type": "parameter",
+        "datatype": "bool",
+        "defaultValue": "false"
+    },
+	"sber": {
+        "type": "parameter",
+        "datatype": "bool",
+        "defaultValue": "false"
+    },
 	"all": {
 		"type": "computed",
-		"value": "(!telegram && !yandex && !chat2desk)"
+		"value": "(!telegram && !yandex && !chat2desk && !marusia && !sber)"
     }
   },
   "sources":[{
@@ -57,6 +67,22 @@
 	  {
       "condition": "(!all & !chat2desk)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk.Tests/**/*"]
+      },
+	  {
+      "condition": "(!all & !marusia)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Marusia/**/*"]
+      },
+	  {
+      "condition": "(!all & !marusia)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Marusia.Tests/**/*"]
+      },
+	  {
+      "condition": "(!all & !sber)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Sber/**/*"]
+      },
+	  {
+      "condition": "(!all & !sber)",
+      "exclude": [ "GranSteL.Chatbot.Messengers.Sber.Tests/**/*"]
       },
     ]
   }],
@@ -98,6 +124,32 @@
        }],
     "continueOnError": false,
     "description ": "Add reference to Chat2Desk project at main project (*.Api)"
+  },
+  {
+    "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+	"condition": "(all || marusia)",
+    "args": {
+      "executable": "AddMarusia.cmd",
+      "args": ""
+    },
+    "manualInstructions": [{ 
+       "text": "Run 'AddMarusia.cmd'" 
+       }],
+    "continueOnError": false,
+    "description ": "Add reference to Marusia project at main project (*.Api)"
+  },
+  {
+    "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+	"condition": "(all || sber)",
+    "args": {
+      "executable": "AddSber.cmd",
+      "args": ""
+    },
+    "manualInstructions": [{ 
+       "text": "Run 'AddSber.cmd'" 
+       }],
+    "continueOnError": false,
+    "description ": "Add reference to Sber project at main project (*.Api)"
   },
   {
     "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
