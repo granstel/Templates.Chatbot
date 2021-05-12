@@ -68,7 +68,7 @@ namespace GranSteL.Chatbot.Messengers.Sber
                 }));
 
             CreateMap<InternalModels.Response, Response>()
-                .ForMember(d => d.Payload, m => m.MapFrom(s => s))
+                .ForMember(d => d.Payload, m => m.MapFrom(s => s)) // See CreateMap<InternalModels.Response, ResponsePayload>()
                 .ForMember(d => d.MessageName, m => m.Ignore())
                 .ForMember(d => d.SessionId, m => m.Ignore())
                 .ForMember(d => d.MessageId, m => m.Ignore())
@@ -79,8 +79,8 @@ namespace GranSteL.Chatbot.Messengers.Sber
                 .ForMember(d => d.PronounceTextType, m => m.MapFrom(s => PronounceTextTypeValues.Text))
                 .ForMember(d => d.AutoListening, m => m.MapFrom(s => !s.Finished))
                 .ForMember(d => d.Finished, m => m.MapFrom(s => s.Finished))
-                .ForMember(d => d.Items, m => m.MapFrom(s => s))
-                .ForMember(d => d.Suggestions, m => m.MapFrom(s => s.Buttons.Where(b => b.IsQuickReply)))
+                .ForMember(d => d.Items, m => m.MapFrom(s => s)) // See CreateMap<InternalModels.Response, PayloadItem[]>()
+                .ForMember(d => d.Suggestions, m => m.MapFrom(s => s.Buttons.Where(b => b.IsQuickReply))) // See CreateMap<IEnumerable<InternalModels.Button>, Suggestion>()
                 .ForMember(d => d.Emotion, m => m.Ignore())
                 .ForMember(d => d.Intent, m => m.Ignore())
                 .ForMember(d => d.ProjectName, m => m.Ignore())
@@ -117,8 +117,7 @@ namespace GranSteL.Chatbot.Messengers.Sber
                 .ForMember(d => d.SessionId, m => m.MapFrom(s => s.SessionId))
                 .ForMember(d => d.MessageId, m => m.MapFrom(s => s.MessageId))
                 .ForMember(d => d.Uuid, m => m.MapFrom(s => s.Uuid))
-                .ForMember(d => d.Payload, m => m.MapFrom(s => s.Payload))
-                ;
+                .ForMember(d => d.Payload, m => m.MapFrom(s => s.Payload));
 
             CreateMap<RequestPayload, ResponsePayload>()
                 .ForMember(d => d.Device, m => m.MapFrom(s => s.Device))
@@ -135,12 +134,21 @@ namespace GranSteL.Chatbot.Messengers.Sber
 
         private PayloadItem[] MapResponseToItem(InternalModels.Response source, PayloadItem[] destinations, ResolutionContext context)
         {
+            var result = new List<PayloadItem>();
+            
             var itemWithBubble = new PayloadItem
             {
                 Bubble = { Text = source.Text }
             };
 
+            result.Add(itemWithBubble);
+
             var buttons = source.Buttons?.Where(b => !b.IsQuickReply).ToList();
+
+            if (buttons?.Any() != true)
+            {
+                return result.ToArray();
+            }
 
             var cardItems = buttons?.Select(b =>
             {
@@ -195,7 +203,9 @@ namespace GranSteL.Chatbot.Messengers.Sber
                 Card = card
             };
 
-            return new[] { itemWithBubble, itemWithCard };
+            result.Add(itemWithCard);
+
+            return result.ToArray();
         }
 
         private Suggestion MapButtonsToSuggestion(IEnumerable<InternalModels.Button> source, Suggestion destination, ResolutionContext context)
