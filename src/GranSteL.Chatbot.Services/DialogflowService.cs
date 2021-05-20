@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Google.Cloud.Dialogflow.V2;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services.Configuration;
 using GranSteL.Chatbot.Services.Extensions;
 using NLog;
@@ -86,13 +87,20 @@ namespace GranSteL.Chatbot.Services
             var intentRequest = new DetectIntentRequest
             {
                 SessionAsSessionName = session,
-                QueryInput = query
+                QueryInput = query,
+                QueryParams = new QueryParameters()
             };
+
+            var sourceContext = GetContext(_configuration.ProjectId, session, nameof(request.Source));
+            var screenContext = GetContext(_configuration.ProjectId, session, nameof(request.HasScreen));
+            var appealContext = GetContext(_configuration.ProjectId, session, nameof(request.Appeal));
+
+            intentRequest.QueryParams.Contexts.AddRange(new[] { sourceContext, screenContext, appealContext });
 
             return intentRequest;
         }
 
-        public EventInput ResolveEvent(Request request)
+        private EventInput ResolveEvent(Request request)
         {
             var result = default(EventInput);
 
@@ -140,8 +148,7 @@ namespace GranSteL.Chatbot.Services
         {
             EventInput result;
 
-            // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
-            if (request.NewSession == true || string.IsNullOrEmpty(request.Text))
+            if (request.NewSession == true && string.IsNullOrEmpty(request.Text))
             {
                 result = GetEvent(WelcomeEventName);
             }
@@ -151,6 +158,32 @@ namespace GranSteL.Chatbot.Services
             }
 
             return result;
+        }
+
+        private Context GetContext(string projectId, SessionName sessionName, string contextName, int lifeSpan = 2, IDictionary<string, string> parameters = null)
+        {
+            var context = new Context
+            {
+                ContextName = new ContextName(projectId, sessionName.SessionId, contextName),
+                LifespanCount = lifeSpan
+            };
+
+            if (parameters?.Any() == true)
+            {
+                context.Parameters = new Google.Protobuf.WellKnownTypes.Struct();
+
+                foreach (var parameter in parameters)
+                {
+                    var value = new Google.Protobuf.WellKnownTypes.Value
+                    {
+                        StringValue = parameter.Value
+                    };
+
+                    context.Parameters.Fields.Add(parameter.Key, value);
+                }
+            }
+
+            return context;
         }
     }
 }

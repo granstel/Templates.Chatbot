@@ -3,7 +3,7 @@
 	<metadata>
 		<id>GranSteL.Templates.Chatbot</id>
 		<title>GranSteL.Templates.Chatbot</title>
-		<version>2.0.0</version>
+		<version>2.1.0</version>
 		<authors>GranSteL</authors>
 		<owners>GranSteL</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,28 +11,16 @@
 		<repository type="Github" url="https://github.com/granstel/Templates.Chatbot" />
 		<description>Chat bot template for messengers</description>
 		<releaseNotes>
-			.net core 3.1
-			fix path to logs
-			update "Google.Cloud.Dialogflow.V2" to Version="3.1.0"
-			update redis libraries
-			update microsoft's libraries
-			update system's libraries
-			update NLog
-			update libraries for tests
-			update RestSharp
-			update Autofac
-			update Automapper
-			update yandex models library
-			update Telegram library
+
 		</releaseNotes>
-		<tags>Yandex, Telegram, Chat2Desk, Dialogs, Dialogflow, Models, Template, Microsoft QnA</tags>
+		<tags>Yandex, Telegram, Chat2Desk, Marusia, Dialogs, Dialogflow, Template</tags>
 		<license type="file">LICENSE</license>
 		<packageTypes>
 			<packageType name="Template" />
 		</packageTypes>
 	</metadata>
 	<files>
-		<file src=".\src\**\*.*" target="content" exclude="**\bin\**\*.*;**\obj\**\*.*;**\.vs\**\*.*" />
+		<file src=".\src\**\*.*" target="content" exclude="**\bin\**\*.*;**\obj\**\*.*;**\.vs\**\*.*;**\.idea\**\*.*;**\*DotSettings" />
 		<file src=".\LICENSE" />
 	</files>
 </package>

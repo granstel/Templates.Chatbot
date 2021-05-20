@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoMapper;
-using GranSteL.Chatbot.Models.Internal;
+using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services;
 using Moq;
 using NUnit.Framework;

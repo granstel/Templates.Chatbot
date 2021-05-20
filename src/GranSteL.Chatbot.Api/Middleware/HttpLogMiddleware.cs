@@ -46,26 +46,34 @@ namespace GranSteL.Chatbot.Api.Middleware
                 }
             }
 
+            var isIncludeEndpoint = _configuration.IncludeEndpoints.Any(w =>
+                context.Request.Path.Value.Contains(w, StringComparison.InvariantCultureIgnoreCase));
+
+            if (!isIncludeEndpoint)
+            {
+                await _next(context);
+
+                return;
+            }
+
             await LogRequest(context.Request);
 
             var responseBody = context.Response.Body;
 
-            using (var stream = new MemoryStream())
+            await using var stream = new MemoryStream();
+            context.Response.Body = stream;
+
+            try
             {
-                context.Response.Body = stream;
+                await _next(context);
+            }
+            finally
+            {
+                await LogResponse(context.Response);
 
-                try
-                {
-                    await _next(context);
-                }
-                finally
-                {
-                    await LogResponse(context.Response);
+                await stream.CopyToAsync(responseBody);
 
-                    await stream.CopyToAsync(responseBody);
-
-                    context.Response.Body = responseBody;
-                }
+                context.Response.Body = responseBody;
             }
         }
 
@@ -165,25 +173,23 @@ namespace GranSteL.Chatbot.Api.Middleware
         {
             try
             {
-                using (var memoryStream = new MemoryStream())
+                await using var memoryStream = new MemoryStream();
+                await body.CopyToAsync(memoryStream);
+
+                body.Seek(0, SeekOrigin.Begin);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                using var reader = new StreamReader(memoryStream);
+                var content = await reader.ReadToEndAsync();
+
+                if (_configuration.ExcludeBodiesWithWords.Any(w => content.Contains(w, StringComparison.InvariantCultureIgnoreCase)))
                 {
-                    await body.CopyToAsync(memoryStream);
-
-                    body.Seek(0, SeekOrigin.Begin);
-                    memoryStream.Seek(0, SeekOrigin.Begin);
-
-                    using (var reader = new StreamReader(memoryStream))
-                    {
-                        var content = reader.ReadToEnd();
-
-                        if (_configuration.ExcludeBodiesWithWords.Any(w => content.Contains(w, StringComparison.InvariantCultureIgnoreCase)))
-                            throw new ExcludeBodyException();
-
-                        builder.AppendLine("Body: ");
-                        builder.AppendLine(content);
-                        _log.SetProperty("Body", content);
-                    }
+                    throw new ExcludeBodyException();
                 }
+
+                builder.AppendLine("Body: ");
+                builder.AppendLine(content);
+                _log.SetProperty("Body", content);
             }
             catch (ExcludeBodyException)
             {

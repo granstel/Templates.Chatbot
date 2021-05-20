@@ -41,12 +41,13 @@ namespace GranSteL.Chatbot.Api
         {
             app.UseMiddleware<ExceptionsMiddleware>();
 
+            app.UseRouting();
+
             if (configuration.HttpLog.Enabled)
             {
                 app.UseMiddleware<HttpLogMiddleware>();
             }
 
-            app.UseRouting();
             app.UseEndpoints(e => e.MapControllers());
         }
     }

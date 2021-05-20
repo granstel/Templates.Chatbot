@@ -1,15 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <ApplicationIcon />
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <StartupObject />
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="appsettings.chat2desk.json" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="appsettings.Chat2Desk.json">
@@ -20,10 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GranSteL.Chatbot.Messengers\GranSteL.Chatbot.Messengers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

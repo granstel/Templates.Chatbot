@@ -2,6 +2,7 @@
 using AutoFixture;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Moq;
 
@@ -66,6 +67,14 @@ namespace GranSteL.Chatbot.Messengers.Tests.Controllers
                 .With(c => c.ActionDescriptor)
                 .Create();
 
+            actionContext.ActionDescriptor.Parameters = new List<ParameterDescriptor>
+            {
+                new ParameterDescriptor
+                {
+                    Name = "token"
+                }
+            };
+            
             var filterMetadata = MockRepository.Create<IFilterMetadata>();
 
             var context = new ActionExecutingContext(actionContext, new List<IFilterMetadata> { filterMetadata.Object }, actionArguments, Target);

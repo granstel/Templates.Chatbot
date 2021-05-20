@@ -19,7 +19,7 @@ namespace GranSteL.Chatbot.Messengers.Yandex
             builder.RegisterType<YandexController>().AsSelf();
 
             builder.RegisterType<YandexService>().As<IYandexService>();
-            builder.RegisterType<YandexProfile>().AsSelf();
+            builder.RegisterType<YandexMapping>().AsSelf();
         }
     }
 }
