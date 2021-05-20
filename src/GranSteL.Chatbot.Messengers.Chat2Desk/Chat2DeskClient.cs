@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading.Tasks;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
 using GranSteL.Chatbot.Services.Extensions;
-using GranSteL.Chatbot.Services.Serialization;
 using NLog;
 using RestSharp;
 

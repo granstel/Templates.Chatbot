@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using AutoFixture;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
 using GranSteL.Chatbot.Services.Extensions;
-using GranSteL.Chatbot.Services.Serialization;
 using Moq;
 using NUnit.Framework;
 using RestSharp;
