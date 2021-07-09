@@ -16,3 +16,8 @@ Allowed channels:
 * -c, --chat2desk
 * -m, --marusia
 * -s, --sber
+
+### Bot examples:
+- https://github.com/granstel/FillInTheTextBot (https://dialogs.yandex.ru/store/skills/12ef2083-sochinyal)
+- https://github.com/granstel/NovgorodBot (https://dialogs.yandex.ru/store/skills/291293c1-chem-zanyat-sya-v-velikom-novgor)
+- https://github.com/granstel/CalendarBot (https://dialogs.yandex.ru/store/skills/006e2c61-moj-rabochij-kalendar)
