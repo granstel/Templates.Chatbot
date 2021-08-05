@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using GranSteL.Chatbot.Messengers.Extensions;
 using GranSteL.Chatbot.Services;
 using GranSteL.Chatbot.Services.Configuration;
 using GranSteL.Chatbot.Services.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -44,7 +44,7 @@ namespace GranSteL.Chatbot.Messengers
         [HttpGet]
         public string GetInfo()
         {
-            var url = this.GetWebHookUrl();
+            var url = GetWebHookUrl(Request);
 
             return $"{DateTime.Now:F} {url}";
         }
@@ -65,7 +65,7 @@ namespace GranSteL.Chatbot.Messengers
         [HttpPut("{token?}")]
         public virtual async Task<IActionResult> CreateWebHook(string token)
         {
-            var url = this.GetWebHookUrl();
+            var url = GetWebHookUrl(Request);
 
             var result = await _messengerService.SetWebhookAsync(url);
 
@@ -94,6 +94,16 @@ namespace GranSteL.Chatbot.Messengers
             var token = value as string;
 
             return string.Equals(_configuration.IncomingToken, token, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        private string GetWebHookUrl(HttpRequest request)
+        {
+            var pathBase = request.PathBase.Value;
+            var pathSegment = request.Path.Value;
+
+            var url = $"{request.Scheme}://{request.Host}{pathBase}{pathSegment}";
+
+            return url;
         }
     }
 }
