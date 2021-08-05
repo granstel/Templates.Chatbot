@@ -59,7 +59,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram.Tests
         {
             await _target.SetWebhookAsync(It.IsAny<string>());
 
-            _telegramBotClient.Verify(c => c.SetWebhookAsync(It.IsAny<string>(), null, It.IsAny<int>(), null, It.IsAny<CancellationToken>()));
+            _telegramBotClient.Verify(c => c.SetWebhookAsync(It.IsAny<string>(), null, null, It.IsAny<int>(), null, It.IsAny<bool>(), It.IsAny<CancellationToken>()));
         }
 
         [Test]
