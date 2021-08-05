@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,7 +7,6 @@ using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
 using GranSteL.Chatbot.Services.Extensions;
 using Moq;
 using NUnit.Framework;
-using RestSharp;
 
 namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 {

@@ -1,5 +1,4 @@
 ﻿using GranSteL.Chatbot.Services.Extensions;
-using RestSharp.Serializers;
 
 namespace GranSteL.Chatbot.Messengers.Chat2Desk
 {

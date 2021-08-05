@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Autofac;
 using GranSteL.Chatbot.Api.DependencyModules;
 using GranSteL.Chatbot.Services.Configuration;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
@@ -13,7 +12,7 @@ namespace GranSteL.Chatbot.Api
 {
     internal static class DependencyConfiguration
     {
-        internal static IContainer Configure(IServiceCollection services, IConfiguration appConfiguration)
+        internal static void Configure(IServiceCollection services, IConfiguration appConfiguration)
         {
             var configuration = appConfiguration.GetSection($"{nameof(AppConfiguration)}").Get<AppConfiguration>();
             
@@ -23,13 +22,10 @@ namespace GranSteL.Chatbot.Api
             services.AddSingleton(configuration.Dialogflow);
 
             services.AddInternalServices();
-            containerBuilder.RegisterModule<ExternalServicesModule>();
+            services.AddExternalServices();
 
             var names = GetAssembliesNames();
-            containerBuilder.RegisterModule(new MappingModule(names));
-            RegisterFromMessengersAssemblies(containerBuilder, names);
-
-            return containerBuilder.Build();
+            services.AddMapping(names);
         }
 
 

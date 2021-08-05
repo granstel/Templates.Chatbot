@@ -2,9 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
-using GranSteL.Chatbot.Services.Extensions;
 using NLog;
-using RestSharp;
 
 namespace GranSteL.Chatbot.Messengers.Chat2Desk
 {

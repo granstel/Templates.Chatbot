@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using RestSharp;
 
 namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
 {
