@@ -2,7 +2,9 @@
 using System.Net;
 using System.Threading.Tasks;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
+using GranSteL.Chatbot.Services.Extensions;
 using NLog;
+using RestSharp;
 
 namespace GranSteL.Chatbot.Messengers.Chat2Desk
 {
@@ -96,7 +98,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
             {
                 var response = await _webClient.ExecuteAsync(restRequest);
 
-                var info = response?.Content.Deserialize<SendInformation>();
+                var info = response.Content.Deserialize<SendInformation>();
 
                 return string.Equals("success", info?.Status, StringComparison.InvariantCultureIgnoreCase);
             }
