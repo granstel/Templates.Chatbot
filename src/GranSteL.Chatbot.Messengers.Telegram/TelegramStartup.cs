@@ -15,9 +15,8 @@ namespace GranSteL.Chatbot.Messengers.Telegram
             {
                 services.AddConfiguration<TelegramConfiguration>("appsettings.Telegram.json");
 
-                services.AddTransient<ITelegramBotClient>(RegisterTelegramClient);
-
                 services.AddTransient<ITelegramService, TelegramService>();
+                services.AddTransient<ITelegramBotClient>(RegisterTelegramClient);
             });
         }
 
