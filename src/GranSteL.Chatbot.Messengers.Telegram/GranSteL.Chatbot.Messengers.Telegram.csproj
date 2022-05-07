@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Telegram.Bot" Version="15.*" />
+    <PackageReference Include="Telegram.Bot" Version="16.*" />
   </ItemGroup>
 
   <ItemGroup>
