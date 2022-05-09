@@ -6,6 +6,7 @@ using Moq;
 using NUnit.Framework;
 using MailRu.Marusia.Models;
 using MailRu.Marusia.Models.Input;
+using Microsoft.Extensions.Logging;
 using InternalModels = GranSteL.Chatbot.Models;
 
 namespace GranSteL.Chatbot.Messengers.Marusia.Tests
@@ -27,10 +28,11 @@ namespace GranSteL.Chatbot.Messengers.Marusia.Tests
         {
             _mockRepository = new MockRepository(MockBehavior.Strict);
 
+            var loggerMock = Mock.Of<ILogger<MarusiaService>>();
             _conversationService = _mockRepository.Create<IConversationService>();
             _mapper = _mockRepository.Create<IMapper>();
 
-            _target = new MarusiaService(_conversationService.Object, _mapper.Object);
+            _target = new MarusiaService(loggerMock, _conversationService.Object, _mapper.Object);
 
             _fixture = new Fixture();
         }

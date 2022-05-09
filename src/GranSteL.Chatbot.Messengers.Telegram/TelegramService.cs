@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services;
-using NLog;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -13,9 +13,11 @@ namespace GranSteL.Chatbot.Messengers.Telegram
     {
         private readonly ITelegramBotClient _client;
 
-        private readonly Logger _log = LogManager.GetLogger(nameof(TelegramService));
-
-        public TelegramService(ITelegramBotClient client, IConversationService conversationService, IMapper mapper) : base(conversationService, mapper)
+        public TelegramService(
+            ILogger<TelegramService> log,
+            ITelegramBotClient client,
+            IConversationService conversationService,
+            IMapper mapper) : base(log, conversationService, mapper)
         {
             _client = client;
         }
@@ -42,7 +44,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram
             }
             catch (Exception e)
             {
-                _log.Error(e);
+                Log.LogError(e, "Error while set webhook");
 
                 return false;
             }
@@ -60,7 +62,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram
             }
             catch (Exception e)
             {
-                _log.Error(e);
+                Log.LogError(e, "Error while delete webhook");
             }
 
             return false;
@@ -83,7 +85,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram
             }
             catch (Exception e)
             {
-                _log.Warn(e);
+                Log.LogError(e, "Error while send text message");
             }
         }
     }

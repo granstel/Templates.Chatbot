@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using GranSteL.Chatbot.Services;
+using Microsoft.Extensions.Logging;
 using Sber.SmartApp.Models;
 
 namespace GranSteL.Chatbot.Messengers.Sber
@@ -10,8 +11,9 @@ namespace GranSteL.Chatbot.Messengers.Sber
         private readonly IMapper _mapper;
 
         public SberService(
+            ILogger<SberService> log,
             IConversationService conversationService,
-            IMapper mapper) : base(conversationService, mapper)
+            IMapper mapper) : base(log, conversationService, mapper)
         {
             _mapper = mapper;
         }

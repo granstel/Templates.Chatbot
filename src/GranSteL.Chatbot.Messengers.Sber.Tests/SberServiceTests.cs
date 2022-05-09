@@ -2,6 +2,7 @@
 using AutoFixture;
 using AutoMapper;
 using GranSteL.Chatbot.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using Sber.SmartApp.Models;
@@ -26,10 +27,11 @@ namespace GranSteL.Chatbot.Messengers.Sber.Tests
         {
             _mockRepository = new MockRepository(MockBehavior.Strict);
 
+            var loggerMock = Mock.Of<ILogger<SberService>>();
             _conversationService = _mockRepository.Create<IConversationService>();
             _mapper = _mockRepository.Create<IMapper>();
 
-            _target = new SberService(_conversationService.Object, _mapper.Object);
+            _target = new SberService(loggerMock, _conversationService.Object, _mapper.Object);
 
             _fixture = new Fixture();
         }

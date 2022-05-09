@@ -5,6 +5,7 @@ using AutoMapper;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
 using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
@@ -28,11 +29,12 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         {
             _mockRepository = new MockRepository(MockBehavior.Default);
 
+            var loggerMock = Mock.Of<ILogger<Chat2DeskService>>();
             _client = _mockRepository.Create<IChat2DeskClient>();
             _conversationService = _mockRepository.Create<IConversationService>();
             _mapper = _mockRepository.Create<IMapper>();
 
-            _target = new Chat2DeskService(_client.Object, _conversationService.Object, _mapper.Object);
+            _target = new Chat2DeskService(loggerMock, _client.Object, _conversationService.Object, _mapper.Object);
 
             _fixture = new Fixture();
         }
