@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace GranSteL.Chatbot.Messengers.Marusia
 {
-    [Produces("application/json")]
     public class MarusiaController : MessengerController<InputModel, OutputModel>
     {
         public MarusiaController(IMarusiaService marusiaService, MarusiaConfiguration configuration) : base(marusiaService, configuration)

@@ -4,7 +4,6 @@ using Telegram.Bot.Types;
 
 namespace GranSteL.Chatbot.Messengers.Telegram
 {
-    [Produces("application/json")]
     public class TelegramController : MessengerController<Update, string>
     {
         private readonly ITelegramService _telegramService;
