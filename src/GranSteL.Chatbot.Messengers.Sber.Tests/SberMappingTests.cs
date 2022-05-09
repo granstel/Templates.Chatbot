@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
+using Moq;
 using NUnit.Framework;
 
 namespace GranSteL.Chatbot.Messengers.Sber.Tests
@@ -11,7 +13,9 @@ namespace GranSteL.Chatbot.Messengers.Sber.Tests
         [SetUp]
         public void InitTest()
         {
-            _target = new Mapper(new MapperConfiguration(c => c.AddProfile<SberMapping>()));
+            var loggerMock = Mock.Of<ILogger<SberMapping>>();
+            var profile = new SberMapping(loggerMock);
+            _target = new Mapper(new MapperConfiguration(c => c.AddProfile(profile)));
         }
 
         [Test]
