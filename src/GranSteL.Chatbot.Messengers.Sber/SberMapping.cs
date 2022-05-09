@@ -11,7 +11,7 @@ using SberModels = Sber.SmartApp.Models;
 namespace GranSteL.Chatbot.Messengers.Sber
 {
     /// <summary>
-    /// Probably, registered at MappingModule of "Services" project
+    /// Probably, registered at MappingRegistration of "Services" project
     /// </summary>
     public class SberMapping : Profile
     {
