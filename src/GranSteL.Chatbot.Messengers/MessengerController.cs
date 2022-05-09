@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 namespace GranSteL.Chatbot.Messengers
 {
     [Route("[controller]")]
+    [Produces("application/json")]
     public abstract class MessengerController<TInput, TOutput> : Controller
     {
         private readonly IMessengerService<TInput, TOutput> _messengerService;
