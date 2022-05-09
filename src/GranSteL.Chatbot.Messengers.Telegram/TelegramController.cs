@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
 
 namespace GranSteL.Chatbot.Messengers.Telegram
@@ -8,7 +9,8 @@ namespace GranSteL.Chatbot.Messengers.Telegram
     {
         private readonly ITelegramService _telegramService;
 
-        public TelegramController(ITelegramService telegramService, TelegramConfiguration configuration) : base(telegramService, configuration)
+        public TelegramController(ILogger<TelegramController> log, ITelegramService telegramService, TelegramConfiguration configuration)
+            : base(log, telegramService, configuration)
         {
             _telegramService = telegramService;
         }
