@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using GranSteL.Chatbot.Services;
-using Microsoft.Extensions.Logging;
-using Moq;
 using NUnit.Framework;
 
 namespace GranSteL.Chatbot.Messengers.Sber.Tests
