@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
 using GranSteL.Chatbot.Services.Extensions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using RestSharp;
@@ -29,11 +30,12 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         {
             _mockRepository = new MockRepository(MockBehavior.Default);
 
+            var loggerMock = Mock.Of<ILogger<Chat2DeskClient>>();
             _webClient = _mockRepository.Create<IRestClient>();
             _configuration = _mockRepository.Create<Chat2DeskConfiguration>();
             _configuration.SetupGet(c => c.Url).Returns("http://test.test");
 
-            _target = new Chat2DeskClient(_webClient.Object, _configuration.Object, new CustomJsonSerializer());
+            _target = new Chat2DeskClient(loggerMock, _webClient.Object, _configuration.Object, new CustomJsonSerializer());
 
             _fixture = new Fixture();
         }
