@@ -1,12 +1,17 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using NLog;
 
 namespace GranSteL.Chatbot.Services.Extensions
 {
     public static class SerializationExtensions
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log;
+
+        static SerializationExtensions()
+        {
+            Log = InternalLoggerFactory.CreateLogger(nameof(SerializationExtensions));
+        }
         
         public static string Serialize(this object obj, JsonSerializerSettings settings = null)
         {
@@ -29,7 +34,7 @@ namespace GranSteL.Chatbot.Services.Extensions
             }
             catch (Exception e)
             {
-                Log.Warn(e);
+                Log.LogError(e, "Error while deserialize");
             }
 
             return default;
