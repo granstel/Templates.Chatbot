@@ -1,8 +1,11 @@
-﻿using GranSteL.Chatbot.Api.Middleware;
+﻿using System.Linq;
+using GranSteL.Chatbot.Api.Extensions;
+using GranSteL.Chatbot.Api.Middleware;
 using GranSteL.Chatbot.Services;
 using GranSteL.Chatbot.Services.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,6 +29,11 @@ namespace GranSteL.Chatbot.Api
                 .AddMvc()
                 .AddNewtonsoftJson();
 
+            services.AddHttpLogging(o =>
+            {
+                o.LoggingFields = HttpLoggingFields.All;
+            });
+
             DependencyConfiguration.Configure(services, _configuration);
         }
 
@@ -39,7 +47,10 @@ namespace GranSteL.Chatbot.Api
 
             if (configuration.HttpLog.Enabled)
             {
-                app.UseMiddleware<HttpLogMiddleware>();
+                app.UseWhen(context => configuration.HttpLog.IncludeEndpoints.Any(context.ContainsEndpoint), a =>
+                {
+                    a.UseHttpLogging();
+                });
             }
 
             app.UseEndpoints(e => e.MapControllers());
