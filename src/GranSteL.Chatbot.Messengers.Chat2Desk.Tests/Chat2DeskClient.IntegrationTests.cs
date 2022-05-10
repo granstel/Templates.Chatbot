@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Moq;
 using NUnit.Framework;
 using RestSharp;
 
@@ -14,6 +16,8 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
         [SetUp]
         public void InitTest()
         {
+            var loggerMock = Mock.Of<ILogger<Chat2DeskClient>>();
+
             var webClient = new RestClient { Proxy = new WebProxy("127.0.0.1", 8888) };
 
             _configuration = new Chat2DeskConfiguration
@@ -23,7 +27,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk.Tests
                 IncomingToken = "%CHATBOT_CHAT2DESK_INCOMINGTOKEN%"
             };
 
-            _target = new Chat2DeskClient(webClient, _configuration, new CustomJsonSerializer());
+            _target = new Chat2DeskClient(loggerMock, webClient, _configuration, new CustomJsonSerializer());
         }
 
         [Test]

@@ -5,6 +5,7 @@ using GranSteL.Chatbot.Messengers.Tests.Fixtures;
 using GranSteL.Chatbot.Services;
 using GranSteL.Chatbot.Services.Configuration;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
@@ -23,10 +24,11 @@ namespace GranSteL.Chatbot.Messengers.Tests.Controllers
         {
             InitTestBase();
 
+            var loggerMock = Mock.Of<ILogger<ControllerFixture>>();
             _messengerService = MockRepository.Create<IMessengerService<InputFixture, OutputFixture>>();
             _configuration = MockRepository.Create<MessengerConfiguration>();
 
-            Target = new ControllerFixture(_messengerService.Object, _configuration.Object);
+            Target = new ControllerFixture(loggerMock, _messengerService.Object, _configuration.Object);
         }
 
         #region OnActionExecuting

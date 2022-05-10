@@ -4,7 +4,7 @@ using AutoMapper;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
 using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services;
-using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace GranSteL.Chatbot.Messengers.Chat2Desk
 {
@@ -12,9 +12,11 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
     {
         private readonly IChat2DeskClient _client;
 
-        private readonly Logger _log = LogManager.GetLogger(nameof(Chat2DeskService));
-
-        public Chat2DeskService(IChat2DeskClient client, IConversationService conversationService, IMapper mapper) : base(conversationService, mapper)
+        public Chat2DeskService(
+            ILogger<Chat2DeskService> log,
+            IChat2DeskClient client,
+            IConversationService conversationService,
+            IMapper mapper) : base(log, conversationService, mapper)
         {
             _client = client;
         }
@@ -50,7 +52,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
             }
             catch (Exception e)
             {
-                _log.Warn(e);
+                Log.LogError(e, "Error while send text message");
             }
         }
     }

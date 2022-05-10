@@ -3,6 +3,7 @@ using AutoMapper;
 using GranSteL.Chatbot.Services;
 using MailRu.Marusia.Models;
 using MailRu.Marusia.Models.Input;
+using Microsoft.Extensions.Logging;
 
 namespace GranSteL.Chatbot.Messengers.Marusia
 {
@@ -11,8 +12,9 @@ namespace GranSteL.Chatbot.Messengers.Marusia
         private readonly IMapper _mapper;
 
         public MarusiaService(
+            ILogger<MarusiaService> log,
             IConversationService conversationService,
-            IMapper mapper) : base(conversationService, mapper)
+            IMapper mapper) : base(log, conversationService, mapper)
         {
             _mapper = mapper;
         }

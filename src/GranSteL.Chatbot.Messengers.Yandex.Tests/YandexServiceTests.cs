@@ -2,6 +2,7 @@
 using AutoFixture;
 using AutoMapper;
 using GranSteL.Chatbot.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using Yandex.Dialogs.Models;
@@ -27,10 +28,11 @@ namespace GranSteL.Chatbot.Messengers.Yandex.Tests
         {
             _mockRepository = new MockRepository(MockBehavior.Strict);
 
+            var loggerMock = Mock.Of<ILogger<YandexService>>();
             _conversationService = _mockRepository.Create<IConversationService>();
             _mapper = _mockRepository.Create<IMapper>();
 
-            _target = new YandexService(_conversationService.Object, _mapper.Object);
+            _target = new YandexService(loggerMock, _conversationService.Object, _mapper.Object);
 
             _fixture = new Fixture();
         }
