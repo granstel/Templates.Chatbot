@@ -7,7 +7,7 @@ using Google.Cloud.Dialogflow.V2;
 using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services.Configuration;
 using GranSteL.Chatbot.Services.Extensions;
-using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace GranSteL.Chatbot.Services
 {
@@ -25,7 +25,7 @@ namespace GranSteL.Chatbot.Services
             {ErrorCommand, ErrorEventName}
         };
 
-        private readonly Logger _log = LogManager.GetLogger(nameof(DialogflowService));
+        private readonly ILogger<DialogflowService> _log;
 
         private readonly SessionsClient _dialogflowClient;
         private readonly DialogflowConfiguration _configuration;
@@ -33,8 +33,13 @@ namespace GranSteL.Chatbot.Services
 
         private readonly Dictionary<Source, Func<Request, EventInput>> _eventResolvers;
 
-        public DialogflowService(SessionsClient dialogflowClient, DialogflowConfiguration configuration, IMapper mapper)
+        public DialogflowService(
+            ILogger<DialogflowService> log,
+            SessionsClient dialogflowClient,
+            DialogflowConfiguration configuration,
+            IMapper mapper)
         {
+            _log = log;
             _dialogflowClient = dialogflowClient;
             _configuration = configuration;
             _mapper = mapper;
@@ -50,12 +55,12 @@ namespace GranSteL.Chatbot.Services
             var intentRequest = CreateQuery(request);
 
             if (_configuration.LogQuery)
-                _log.Trace($"Request:{System.Environment.NewLine}{intentRequest.Serialize()}");
+                _log.LogTrace($"Request:{System.Environment.NewLine}{intentRequest.Serialize()}");
 
             var intentResponse = await _dialogflowClient.DetectIntentAsync(intentRequest);
 
             if (_configuration.LogQuery)
-                _log.Trace($"Response:{System.Environment.NewLine}{intentResponse.Serialize()}");
+                _log.LogTrace($"Response:{System.Environment.NewLine}{intentResponse.Serialize()}");
 
             var queryResult = intentResponse.QueryResult;
 

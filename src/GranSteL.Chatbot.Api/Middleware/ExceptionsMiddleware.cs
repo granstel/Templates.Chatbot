@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace GranSteL.Chatbot.Api.Middleware
 {
     public class ExceptionsMiddleware
     {
-        private readonly Logger _log = LogManager.GetLogger(nameof(ExceptionsMiddleware));
+        private readonly ILogger<ExceptionsMiddleware> _log;
         private readonly RequestDelegate _next;
 
-        public ExceptionsMiddleware(RequestDelegate next)
+        public ExceptionsMiddleware(ILogger<ExceptionsMiddleware> log, RequestDelegate next)
         {
+            _log = log;
             _next = next;
         }
 
@@ -23,7 +24,7 @@ namespace GranSteL.Chatbot.Api.Middleware
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                _log.LogError(ex, "Error while processing request");
 
                 throw;
             }

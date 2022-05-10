@@ -14,9 +14,6 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
             return result;
         }
 
-        public string RootElement { get; set; }
-        public string Namespace { get; set; }
-        public string DateFormat { get; set; }
         public string ContentType { get; set; }
     }
 }

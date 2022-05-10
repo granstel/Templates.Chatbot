@@ -1,5 +1,4 @@
 # Templates.Chatbot
-[![Build status](https://ci.appveyor.com/api/projects/status/qg4xlrtr32vxmrad?svg=true)](https://ci.appveyor.com/project/granstel/templates-chatbot/)
 [![NuGet](https://buildstats.info/nuget/GranSteL.Templates.Chatbot)](https://www.nuget.org/packages/GranSteL.Templates.Chatbot)
 
 Template of chat bot for messengers
@@ -19,5 +18,3 @@ Allowed channels:
 
 ### Bot examples:
 - https://github.com/granstel/FillInTheTextBot (https://dialogs.yandex.ru/store/skills/12ef2083-sochinyal)
-- https://github.com/granstel/NovgorodBot (https://dialogs.yandex.ru/store/skills/291293c1-chem-zanyat-sya-v-velikom-novgor)
-- https://github.com/granstel/CalendarBot (https://dialogs.yandex.ru/store/skills/006e2c61-moj-rabochij-kalendar)

@@ -32,6 +32,7 @@ namespace GranSteL.Chatbot.Messengers.Tests.Controllers
             var host = new HostString(Fixture.Create<string>());
 
             var request = MockRepository.Create<HttpRequest>();
+            request.SetupGet(r => r.Scheme).Returns("https");
             request.SetupGet(r => r.Path).Returns(pathString);
             request.SetupGet(r => r.Host).Returns(host);
             request.SetupGet(r => r.PathBase).Returns(pathString);

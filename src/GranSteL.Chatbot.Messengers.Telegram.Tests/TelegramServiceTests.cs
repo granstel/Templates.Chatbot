@@ -4,6 +4,7 @@ using AutoFixture;
 using AutoMapper;
 using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using Telegram.Bot;
@@ -29,11 +30,12 @@ namespace GranSteL.Chatbot.Messengers.Telegram.Tests
         {
             _mockRepository = new MockRepository(MockBehavior.Default);
 
+            var loggerMock = Mock.Of<ILogger<TelegramService>>();
             _telegramBotClient = _mockRepository.Create<ITelegramBotClient>();
             _conversationService = _mockRepository.Create<IConversationService>();
             _mapper = _mockRepository.Create<IMapper>();
 
-            _target = new TelegramService(_telegramBotClient.Object, _conversationService.Object, _mapper.Object);
+            _target = new TelegramService(loggerMock, _telegramBotClient.Object, _conversationService.Object, _mapper.Object);
             
             _fixture = new Fixture();
         }
@@ -59,7 +61,7 @@ namespace GranSteL.Chatbot.Messengers.Telegram.Tests
         {
             await _target.SetWebhookAsync(It.IsAny<string>());
 
-            _telegramBotClient.Verify(c => c.SetWebhookAsync(It.IsAny<string>(), null, It.IsAny<int>(), null, It.IsAny<CancellationToken>()));
+            _telegramBotClient.Verify(c => c.SetWebhookAsync(It.IsAny<string>(), null, null, It.IsAny<int>(), null, It.IsAny<bool>(), It.IsAny<CancellationToken>()));
         }
 
         [Test]

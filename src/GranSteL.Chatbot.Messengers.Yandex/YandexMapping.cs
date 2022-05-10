@@ -10,7 +10,7 @@ using YandexModels = Yandex.Dialogs.Models;
 namespace GranSteL.Chatbot.Messengers.Yandex
 {
     /// <summary>
-    /// Probably, registered at MappingModule of "Services" project
+    /// Probably, registered at MappingRegistration of "Services" project
     /// </summary>
     public class YandexMapping : Profile
     {

@@ -3,21 +3,20 @@ using System.Threading.Tasks;
 using AutoMapper;
 using GranSteL.Chatbot.Models;
 using GranSteL.Chatbot.Services;
-using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace GranSteL.Chatbot.Messengers
 {
     public abstract class MessengerService<TInput, TOutput> : IMessengerService<TInput, TOutput>
     {
-        protected readonly Logger Log;
+        protected readonly ILogger Log;
 
         private readonly IConversationService _conversationService;
         private readonly IMapper _mapper;
 
-        protected MessengerService(IConversationService conversationService, IMapper mapper)
+        protected MessengerService(ILogger log, IConversationService conversationService, IMapper mapper)
         {
-            Log = LogManager.GetLogger(GetType().Name);
-
+            Log = log;
             _conversationService = conversationService;
             _mapper = mapper;
         }
@@ -48,7 +47,7 @@ namespace GranSteL.Chatbot.Messengers
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.LogError(e, "Error while processing incoming message");
 
                 response = new Response
                 {
@@ -78,12 +77,12 @@ namespace GranSteL.Chatbot.Messengers
 
         public virtual Task<bool> SetWebhookAsync(string url)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public virtual Task<bool> DeleteWebhookAsync()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

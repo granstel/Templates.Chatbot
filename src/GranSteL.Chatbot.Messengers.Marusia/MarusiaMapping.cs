@@ -8,7 +8,7 @@ using MarusiaModels = MailRu.Marusia.Models;
 namespace GranSteL.Chatbot.Messengers.Marusia
 {
     /// <summary>
-    /// Probably, registered at MappingModule of "Services" project
+    /// Probably, registered at MappingRegistration of "Services" project
     /// </summary>
     public class MarusiaMapping : Profile
     {

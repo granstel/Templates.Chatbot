@@ -2,6 +2,7 @@
 using AutoFixture;
 using GranSteL.Chatbot.Messengers.Tests.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using Telegram.Bot.Types;
@@ -19,10 +20,11 @@ namespace GranSteL.Chatbot.Messengers.Telegram.Tests
         {
             InitTestBase();
 
+            var loggerMock = Mock.Of<ILogger<TelegramController>>();
             _telegramService = MockRepository.Create<ITelegramService>();
             _configuration = MockRepository.Create<TelegramConfiguration>();
 
-            Target = new TelegramController(_telegramService.Object, _configuration.Object);
+            Target = new TelegramController(loggerMock, _telegramService.Object, _configuration.Object);
         }
 
         [Test]

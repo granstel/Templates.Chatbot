@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Sber.SmartApp.Models;
 
 namespace GranSteL.Chatbot.Messengers.Sber
 {
-    [Produces("application/json")]
     public class SberController : MessengerController<Request, Response>
     {
-        public SberController(ISberService sberService, SberConfiguration configuration) : base(sberService,
-            configuration)
+        public SberController(ILogger<SberController> log, ISberService sberService, SberConfiguration configuration)
+            : base(log, sberService, configuration)
         {
             SerializerSettings = new JsonSerializerSettings
             {

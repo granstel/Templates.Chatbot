@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using NLog;
+using GranSteL.Chatbot.Services;
+using Microsoft.Extensions.Logging;
 using Sber.SmartApp.Models;
 using Sber.SmartApp.Models.Constants;
 using InternalModels = GranSteL.Chatbot.Models;
@@ -11,14 +12,14 @@ using SberModels = Sber.SmartApp.Models;
 namespace GranSteL.Chatbot.Messengers.Sber
 {
     /// <summary>
-    /// Probably, registered at MappingModule of "Services" project
+    /// Probably, registered at MappingRegistration of "Services" project
     /// </summary>
     public class SberMapping : Profile
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
         public SberMapping()
         {
+            var log = InternalLoggerFactory.CreateLogger<SberMapping>();
+
             CreateMap<Request, InternalModels.Request>()
                 .ForMember(d => d.ChatHash, m => m.MapFrom((s, d) => s?.Payload?.AppInfo?.ProjectId.ToString()))
                 .ForMember(d => d.UserHash, m => m.MapFrom((s, d) => s?.Uuid?.Sub ?? s?.Uuid?.UserId))
@@ -45,7 +46,7 @@ namespace GranSteL.Chatbot.Messengers.Sber
                     }
                     catch (Exception e)
                     {
-                        Log.Error(e);
+                        log?.LogError(e, "Error while request mapping");
                     }
 
                     return s?.Payload?.Message?.OriginalText;

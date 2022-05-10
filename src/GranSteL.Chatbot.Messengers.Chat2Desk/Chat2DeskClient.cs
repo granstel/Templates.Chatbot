@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using GranSteL.Chatbot.Messengers.Chat2Desk.Models;
 using GranSteL.Chatbot.Services.Extensions;
-using NLog;
+using Microsoft.Extensions.Logging;
 using RestSharp;
 
 namespace GranSteL.Chatbot.Messengers.Chat2Desk
@@ -14,10 +14,15 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
         private readonly Chat2DeskConfiguration _configuration;
         private readonly CustomJsonSerializer _serializer;
 
-        private readonly Logger _log = LogManager.GetLogger(nameof(Chat2DeskClient));
+        private readonly ILogger<Chat2DeskClient> _log;
 
-        public Chat2DeskClient(IRestClient webClient, Chat2DeskConfiguration configuration, CustomJsonSerializer serializer)
+        public Chat2DeskClient(
+            ILogger<Chat2DeskClient> log,
+            IRestClient webClient,
+            Chat2DeskConfiguration configuration,
+            CustomJsonSerializer serializer)
         {
+            _log = log;
             _webClient = webClient;
             _configuration = configuration;
             _serializer = serializer;
@@ -48,7 +53,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
             }
             catch (Exception e)
             {
-                _log.Error(e, "При создании web hook возникла ошибка");
+                _log.LogError(e, "Error while set webhook");
 
                 return false;
             }
@@ -73,7 +78,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
             }
             catch (Exception e)
             {
-                _log.Error(e, "При удалении web hook возникла ошибка");
+                _log.LogError(e, "Error while delete webhook");
 
                 return false;
             }
@@ -98,13 +103,13 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
             {
                 var response = await _webClient.ExecuteAsync(restRequest);
 
-                var info = response?.Content.Deserialize<SendInformation>();
+                var info = response.Content.Deserialize<SendInformation>();
 
                 return string.Equals("success", info?.Status, StringComparison.InvariantCultureIgnoreCase);
             }
             catch (Exception e)
             {
-                _log.Error(e, "При отправлении сообщения возникла ошибка");
+                _log.LogError(e, "Error while send text message");
 
                 return false;
             }
