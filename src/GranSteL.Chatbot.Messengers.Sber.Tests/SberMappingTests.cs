@@ -14,8 +14,6 @@ namespace GranSteL.Chatbot.Messengers.Sber.Tests
         [SetUp]
         public void InitTest()
         {
-            InternalLoggerFactory.Factory = Mock.Of<ILoggerFactory>();
-
             _target = new Mapper(new MapperConfiguration(c => c.AddProfile<SberMapping>()));
         }
 
