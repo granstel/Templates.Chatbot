@@ -34,7 +34,7 @@ namespace GranSteL.Chatbot.Services.Extensions
             }
             catch (Exception e)
             {
-                Log.LogError(e, "Error while deserialize");
+                Log?.LogError(e, "Error while deserialize");
             }
 
             return default;
