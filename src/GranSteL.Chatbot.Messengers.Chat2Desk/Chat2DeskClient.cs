@@ -14,7 +14,7 @@ namespace GranSteL.Chatbot.Messengers.Chat2Desk
         private readonly Chat2DeskConfiguration _configuration;
         private readonly CustomJsonSerializer _serializer;
 
-        private readonly ILogger _log;
+        private readonly ILogger<Chat2DeskClient> _log;
 
         public Chat2DeskClient(
             ILogger<Chat2DeskClient> log,
