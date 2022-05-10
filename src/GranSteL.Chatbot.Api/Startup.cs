@@ -15,7 +15,7 @@ namespace GranSteL.Chatbot.Api
     public class Startup
     {
         private readonly IConfiguration _configuration;
-        
+
         public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             _configuration = configuration;
