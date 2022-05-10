@@ -83,31 +83,61 @@
 	  {
       "condition": "(!all & !sber)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Sber.Tests/**/*"]
-      },
+      }
     ]
   }],
-  "postActions": [{
-    "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-	"condition": "(all || telegram)",
-    "args": {
-      "executable": "AddTelegram.cmd",
-      "args": ""
+  "postActions": [
+    {
+      "condition": "(OS != \"Windows_NT\")",
+      "description": "Make scripts executable",
+      "manualInstructions": [{
+        "text": "Run 'chmod +x *.sh'"
+      }],
+      "actionId": "cb9a6cf3-4f5c-4860-b9d2-03a574959774",
+      "args": {
+        "+x": "*.sh"
+      },
+      "continueOnError": true
     },
-    "manualInstructions": [{ 
-       "text": "Run 'AddTelegram.cmd'" 
-       }],
-    "continueOnError": false,
-    "description ": "Add reference to Telegram project at main project (*.Api)"
-  },
+    {
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "condition": "(all || telegram && OS == \"Windows_NT\")",
+      "args": {
+        "executable": "AddTelegram.cmd",
+        "args": ""
+      },
+      "manualInstructions": [
+        {
+          "text": "Run 'AddTelegram.cmd'"
+        }
+      ],
+      "continueOnError": false,
+      "description ": "Add reference to Telegram project at main project (*.Api)"
+    },
+    {
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "condition": "(all || telegram && OS != \"Windows_NT\")",
+      "args": {
+        "executable": "AddTelegram.sh",
+        "args": ""
+      },
+      "manualInstructions": [
+        {
+          "text": "Run 'AddTelegram.sh'"
+        }
+      ],
+      "continueOnError": false,
+      "description ": "Add reference to Telegram project at main project (*.Api)"
+    },
   {
     "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
 	"condition": "(all || yandex)",
     "args": {
-      "executable": "AddYandex.cmd",
+      "executable": "bash AddYandex.sh",
       "args": ""
     },
     "manualInstructions": [{ 
-       "text": "Run 'AddYandex.cmd'" 
+       "text": "Run 'bash AddYandex.sh'" 
        }],
     "continueOnError": false,
     "description ": "Add reference to Yandex project at main project (*.Api)"
@@ -153,6 +183,7 @@
   },
   {
     "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+    "condition": "(OS == \"Windows_NT\")",
     "args": {
       "executable": "cmd",
       "args": "/C del *.cmd"
@@ -162,5 +193,20 @@
        }],
     "continueOnError": false,
     "description ": "Delete *.cmd files"
+  },
+  {
+    "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+    "condition": "(OS != \"Windows_NT\")",
+    "args": {
+      "executable": "Remove.sh",
+      "args": ""
+    },
+    "manualInstructions": [
+      {
+        "text": "Run 'Remove.sh'"
+      }
+    ],
+    "continueOnError": false,
+    "description ": "Add reference to Telegram project at main project (*.Api)"
   }]
 }
