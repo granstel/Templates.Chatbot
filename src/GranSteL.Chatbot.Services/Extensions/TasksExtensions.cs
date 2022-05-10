@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Threading.Tasks;
-using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace GranSteL.Chatbot.Services.Extensions
 {
     public static class TasksExtensions
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log;
+
+        static TasksExtensions()
+        {
+            Log = InternalLoggerFactory.CreateLogger(nameof(TaskExtensions));
+        }
 
         /// <summary>
         /// Fire-and-forget
-        /// Позволяет не дожидаться завершения задачи.
-        /// В случае ошибки исключение будет логировано.
+        /// Allows you not to wait for the task to complete.
+        /// In case of an error, an exception will be logged
         /// </summary>
         /// <param name="task"></param>
         public static void Forget(this Task task)
@@ -24,7 +29,7 @@ namespace GranSteL.Chatbot.Services.Extensions
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e, "Error while executing the task");
+                    Log?.LogError(e, "Error while executing the task");
                 }
             }).ConfigureAwait(false);
         }
