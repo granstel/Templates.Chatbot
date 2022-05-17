@@ -256,30 +256,15 @@
       "condition": "(OS == \"Windows_NT\")",
       "args": {
         "executable": "cmd",
-        "args": "/C del *.cmd"
+        "args": "/C del *.cmd *.sh"
       },
       "manualInstructions": [
         {
-          "text": "Delete *.cmd files"
+          "text": "Delete *.cmd and *.sh files"
         }
       ],
       "continueOnError": false,
-      "description ": "Delete *.cmd files"
-    },
-    {
-      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(OS == \"Windows_NT\")",
-      "args": {
-        "executable": "cmd",
-        "args": "/C del *.sh"
-      },
-      "manualInstructions": [
-        {
-          "text": "Delete *.sh files"
-        }
-      ],
-      "continueOnError": false,
-      "description ": "Delete *.sh files"
+      "description ": "Delete *.cmd and *.sh files"
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
@@ -294,7 +279,7 @@
         }
       ],
       "continueOnError": false,
-      "description ": "Delete *.sh files"
+      "description ": "Delete *.cmd and *.sh files"
     }
   ]
 }
