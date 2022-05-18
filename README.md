@@ -7,7 +7,7 @@ Install
 -------
 It's available via dotnet new:
 `dotnet new -i GranSteL.Templates.Chatbot`
-and then `dotnet new gsl.chatbot.full -n MyChatBot -o .\ --allow-scripts yes` at the required folder. You will get projects for all supported channels: Telegram, Yandex.Dialogs, Chat2Desk. You can specify required channels, e.g. Telegram: `dotnet new gsl.chatbot.full -n MyChatBot -o .\ --telegram --allow-scripts yes`
+and then `dotnet new gsl.chatbot.full -n MyChatBot -o ./ --allow-scripts yes` at the required folder. You will get projects for all supported channels: Telegram, Yandex.Dialogs, Chat2Desk. You can specify required channels, e.g. Telegram: `dotnet new gsl.chatbot.full -n MyChatBot -o ./ --telegram --allow-scripts yes`
 
 Allowed channels:
 * -t, --telegram
