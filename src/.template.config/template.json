@@ -103,7 +103,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || telegram && OS == \"Windows_NT\")",
+      "condition": "((all || telegram) && OS == \"Windows_NT\")",
       "args": {
         "executable": "AddTelegram.cmd",
         "args": ""
@@ -118,7 +118,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || telegram && OS != \"Windows_NT\")",
+      "condition": "((all || telegram) && OS != \"Windows_NT\")",
       "args": {
         "executable": "AddTelegram.sh",
         "args": ""
