@@ -133,7 +133,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || yandex && OS == \"Windows_NT\")",
+      "condition": "((all || yandex) && OS == \"Windows_NT\")",
       "args": {
         "executable": "AddYandex.cmd",
         "args": ""
@@ -148,7 +148,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || yandex && OS != \"Windows_NT\")",
+      "condition": "((all || yandex) && OS != \"Windows_NT\")",
       "args": {
         "executable": "AddYandex.sh",
         "args": ""
@@ -163,7 +163,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || chat2desk && OS == \"Windows_NT\")",
+      "condition": "((all || chat2desk) && OS == \"Windows_NT\")",
       "args": {
         "executable": "AddChat2Desk.cmd",
         "args": ""
@@ -178,7 +178,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || chat2desk && OS != \"Windows_NT\")",
+      "condition": "((all || chat2desk) && OS != \"Windows_NT\")",
       "args": {
         "executable": "AddChat2Desk.sh",
         "args": ""
@@ -193,7 +193,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || marusia && OS == \"Windows_NT\")",
+      "condition": "((all || marusia) && OS == \"Windows_NT\")",
       "args": {
         "executable": "AddMarusia.cmd",
         "args": ""
@@ -208,7 +208,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || marusia && OS != \"Windows_NT\")",
+      "condition": "((all || marusia) && OS != \"Windows_NT\")",
       "args": {
         "executable": "AddMarusia.sh",
         "args": ""
@@ -223,7 +223,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || sber && OS == \"Windows_NT\")",
+      "condition": "((all || sber) && OS == \"Windows_NT\")",
       "args": {
         "executable": "AddSber.cmd",
         "args": ""
@@ -238,7 +238,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(all || sber && OS != \"Windows_NT\")",
+      "condition": "((all || sber) && OS != \"Windows_NT\")",
       "args": {
         "executable": "AddSber.sh",
         "args": ""
