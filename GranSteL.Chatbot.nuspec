@@ -3,7 +3,7 @@
 	<metadata>
 		<id>GranSteL.Templates.Chatbot</id>
 		<title>GranSteL.Templates.Chatbot</title>
-		<version>4.2.1</version>
+		<version>5.0.0</version>
 		<authors>GranSteL</authors>
 		<owners>GranSteL</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,9 +11,9 @@
 		<repository type="Github" url="https://github.com/granstel/Templates.Chatbot" />
 		<description>Chat bot template for messengers</description>
 		<releaseNotes>
-			Added Unix/macOS compatible scripts for easy referencing to projects of messengers
+			Removed Chat2Desk messenger
 		</releaseNotes>
-		<tags>Yandex, Telegram, Chat2Desk, Marusia, Dialogs, Dialogflow, Template</tags>
+		<tags>Yandex, Telegram, Marusia, Sber, Dialogs, Dialogflow, Template</tags>
 		<license type="file">LICENSE</license>
 		<packageTypes>
 			<packageType name="Template" />
