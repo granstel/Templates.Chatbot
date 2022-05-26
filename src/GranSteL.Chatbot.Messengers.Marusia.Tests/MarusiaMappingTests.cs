@@ -1,6 +1,5 @@
 ﻿using AutoFixture;
 using AutoFixture.Kernel;
-using AutoMapper;
 using MailRu.Marusia.Models;
 using MailRu.Marusia.Models.Buttons;
 using MailRu.Marusia.Models.Cards;
@@ -12,24 +11,14 @@ namespace GranSteL.Chatbot.Messengers.Marusia.Tests
     [TestFixture]
     public class MarusiaMappingTests
     {
-        private IMapper _target;
-
         private Fixture _fixture;
 
         [SetUp]
         public void InitTest()
         {
-            //_target = new Mapper(new MapperConfiguration(c => c.AddProfile<MarusiaMapping>()));
-
             _fixture = new Fixture();
             _fixture.Customizations.Add(new TypeRelay(typeof(Button), typeof(ResponseButton)));
             _fixture.Customizations.Add(new TypeRelay(typeof(ICard), typeof(ItemsListCard)));
-        }
-
-        [Test]
-        public void ValidateConfiguration_Success()
-        {
-            _target.ConfigurationProvider.AssertConfigurationIsValid();
         }
 
         [Test]
@@ -43,7 +32,7 @@ namespace GranSteL.Chatbot.Messengers.Marusia.Tests
                 .Create();
 
 
-            _target.Map(input, output);
+            output = input.FillOutput(output);
 
 
             Assert.AreEqual(input.Session.SessionId, output.Session.SessionId);
