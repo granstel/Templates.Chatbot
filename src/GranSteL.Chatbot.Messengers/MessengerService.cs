@@ -23,9 +23,8 @@ namespace GranSteL.Chatbot.Messengers
 
         protected virtual Request Before(TInput input)
         {
-            var request = _mapper.Map<Request>(input);
-
-            return request;
+            throw new NotImplementedException(
+                $"Need to map {typeof(TInput)} type to {typeof(Request)} type at overrided '{nameof(Before)}' method at {this.GetType().FullName} type");
         }
 
         public virtual async Task<TOutput> ProcessIncomingAsync(TInput input)
