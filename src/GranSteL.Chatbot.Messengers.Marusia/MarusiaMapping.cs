@@ -12,6 +12,25 @@ namespace GranSteL.Chatbot.Messengers.Marusia
     /// </summary>
     public class MarusiaMapping : Profile
     {
+        public static Models.Request ToRequest(this InputModel source)
+        {
+            if (source == null) return null;
+
+            var destinaton = new Models.Request();
+
+            destinaton.ChatHash = source.Session?.SkillId;
+            destinaton.UserHash = source.Session?.UserId;
+            destinaton.Text = source.Request?.OriginalUtterance;
+            destinaton.SessionId = source.Session?.SessionId;
+            destinaton.NewSession = source.Session?.New;
+            destinaton.Language = source.Meta?.Locale;
+            destinaton.HasScreen = string.Equals(source?.Session?.Application?.ApplicationType, MarusiaModels.ApplicationTypes.Mobile);
+            destinaton.Source = Source.Marusia;
+            destinaton.Appeal = Appeal.NoOfficial;
+
+            return destinaton;
+        }
+
         public MarusiaMapping()
         {
             CreateMap<InputModel, Request>()
