@@ -22,11 +22,6 @@
         "datatype": "bool",
         "defaultValue": "false"
     },
-	"chat2desk": {
-        "type": "parameter",
-        "datatype": "bool",
-        "defaultValue": "false"
-    },
 	"marusia": {
         "type": "parameter",
         "datatype": "bool",
@@ -39,7 +34,7 @@
     },
 	"all": {
 		"type": "computed",
-		"value": "(!telegram && !yandex && !chat2desk && !marusia && !sber)"
+		"value": "(!telegram && !yandex && !marusia && !sber)"
     }
   },
   "sources":[{
@@ -59,14 +54,6 @@
 	  {
       "condition": "(!all & !yandex)",
       "exclude": [ "GranSteL.Chatbot.Messengers.Yandex.Tests/**/*"]
-      },
-	  {
-      "condition": "(!all & !chat2desk)",
-      "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk/**/*"]
-      },
-	  {
-      "condition": "(!all & !chat2desk)",
-      "exclude": [ "GranSteL.Chatbot.Messengers.Chat2Desk.Tests/**/*"]
       },
 	  {
       "condition": "(!all & !marusia)",
@@ -160,36 +147,6 @@
       ],
       "continueOnError": false,
       "description ": "Add reference to Yandex project at main project (*.Api)"
-    },
-    {
-      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "((all || chat2desk) && OS == \"Windows_NT\")",
-      "args": {
-        "executable": "AddChat2Desk.cmd",
-        "args": ""
-      },
-      "manualInstructions": [
-        {
-          "text": "Run 'AddChat2Desk.cmd'"
-        }
-      ],
-      "continueOnError": false,
-      "description ": "Add reference to Chat2Desk project at main project (*.Api)"
-    },
-    {
-      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "((all || chat2desk) && OS != \"Windows_NT\")",
-      "args": {
-        "executable": "AddChat2Desk.sh",
-        "args": ""
-      },
-      "manualInstructions": [
-        {
-          "text": "Run 'AddChat2Desk.sh'"
-        }
-      ],
-      "continueOnError": false,
-      "description ": "Add reference to Chat2Desk project at main project (*.Api)"
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
