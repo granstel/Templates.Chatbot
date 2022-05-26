@@ -25,7 +25,7 @@ namespace GranSteL.Chatbot.Messengers.Marusia
             destinaton.NewSession = source.Session?.New;
             destinaton.Language = source.Meta?.Locale;
             destinaton.HasScreen = string.Equals(source?.Session?.Application?.ApplicationType, MarusiaModels.ApplicationTypes.Mobile);
-            destinaton.Source = Source.Marusia;
+            destinaton.Source = "Marusia";
             destinaton.Appeal = Appeal.NoOfficial;
 
             return destinaton;
@@ -41,7 +41,7 @@ namespace GranSteL.Chatbot.Messengers.Marusia
                 .ForMember(d => d.NewSession, m => m.MapFrom((s, d) => s.Session?.New))
                 .ForMember(d => d.Language, m => m.MapFrom((s, d) => s.Meta?.Locale))
                 .ForMember(d => d.HasScreen, m => m.MapFrom((s, d) => string.Equals(s?.Session?.Application?.ApplicationType, MarusiaModels.ApplicationTypes.Mobile)))
-                .ForMember(d => d.Source, m => m.MapFrom(s => Source.Marusia))
+                .ForMember(d => d.Source, m => m.MapFrom(s => "Marusia"))
                 .ForMember(d => d.Appeal, m => m.MapFrom(s => Appeal.NoOfficial));
 
             CreateMap<Response, MarusiaModels.OutputModel>()

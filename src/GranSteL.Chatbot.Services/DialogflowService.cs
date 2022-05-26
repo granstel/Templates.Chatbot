@@ -31,8 +31,6 @@ namespace GranSteL.Chatbot.Services
         private readonly DialogflowConfiguration _configuration;
         private readonly IMapper _mapper;
 
-        private readonly Dictionary<Source, Func<Request, EventInput>> _eventResolvers;
-
         public DialogflowService(
             ILogger<DialogflowService> log,
             SessionsClient dialogflowClient,
@@ -43,11 +41,6 @@ namespace GranSteL.Chatbot.Services
             _dialogflowClient = dialogflowClient;
             _configuration = configuration;
             _mapper = mapper;
-
-            _eventResolvers = new Dictionary<Source, Func<Request, EventInput>>
-            {
-                {Source.Yandex, YandexEventResolve},
-            };
         }
 
         public async Task<Dialog> GetResponseAsync(Request request)
@@ -109,32 +102,16 @@ namespace GranSteL.Chatbot.Services
         {
             var result = default(EventInput);
 
-            var sourceMessenger = request?.Source;
+            var requestText = request.Text;
 
-            if (sourceMessenger != null)
+            if (string.IsNullOrEmpty(requestText))
             {
-                var sourceValue = sourceMessenger.Value;
-
-                if (_eventResolvers.ContainsKey(sourceValue))
-                {
-                    result = _eventResolvers[sourceValue].Invoke(request);
-                }
-                else
-                {
-                    result = EventByCommand(request.Text);
-                }
+                return GetEvent(WelcomeEventName);
             }
-
-            return result;
-        }
-
-        private EventInput EventByCommand(string requestText)
-        {
-            var result = default(EventInput);
 
             if (_commandDictionary.TryGetValue(requestText, out var eventName))
             {
-                result = GetEvent(eventName);
+                return GetEvent(eventName);
             }
 
             return result;
@@ -147,22 +124,6 @@ namespace GranSteL.Chatbot.Services
                 Name = name,
                 LanguageCode = _configuration.LanguageCode
             };
-        }
-
-        private EventInput YandexEventResolve(Request request)
-        {
-            EventInput result;
-
-            if (request.NewSession == true && string.IsNullOrEmpty(request.Text))
-            {
-                result = GetEvent(WelcomeEventName);
-            }
-            else
-            {
-                result = EventByCommand(request.Text);
-            }
-
-            return result;
         }
 
         private Context GetContext(string projectId, SessionName sessionName, string contextName, int lifeSpan = 2, IDictionary<string, string> parameters = null)

@@ -55,7 +55,7 @@ namespace GranSteL.Chatbot.Messengers.Sber
                 .ForMember(d => d.NewSession, m => m.MapFrom((s, d) => s?.Payload?.NewSession))
                 .ForMember(d => d.Language, m => m.Ignore())
                 .ForMember(d => d.HasScreen, m => m.MapFrom((s, d) => s?.Payload?.Device?.Capabilities?.Screen?.Available ?? false))
-                .ForMember(d => d.Source, m => m.MapFrom(s => InternalModels.Source.Sber))
+                .ForMember(d => d.Source, m => m.MapFrom(s => "Sber"))
                 .ForMember(d => d.Appeal, m => m.MapFrom((s, d) =>
                 {
                     var appeal = InternalModels.Appeal.NoOfficial;

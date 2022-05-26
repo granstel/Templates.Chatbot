@@ -2,7 +2,7 @@ namespace GranSteL.Chatbot.Models
 {
     public class Request
     {
-        public Source Source {get; set;}
+        public string Source {get; set;}
 
         public string ChatHash {get; set;}
 

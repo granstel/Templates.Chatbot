@@ -6,9 +6,10 @@ namespace GranSteL.Chatbot.Models
     {
         public Payload()
         {
-            ButtonsForSource = new Dictionary<Source, ICollection<Button>>();
+            // string - messanger name
+            ButtonsForMessangers = new Dictionary<string, ICollection<Button>>();
         }
 
-        public IDictionary<Source, ICollection<Button>> ButtonsForSource { get; set; }
+        public IDictionary<string, ICollection<Button>> ButtonsForMessangers { get; set; }
     }
 }
